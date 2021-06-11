@@ -1,6 +1,8 @@
 /*
-3. 다음 Program 1.25를 사용하여 선택정렬(Selection Sort)에 대한 성능측정을 하라. 그리 고 프로그램의 실행결과를 이용하여 그래프를 작성하라. 또한, 문제 2의 결과와 같이 하나의 그래프로 작성해서 비교해 보라.
-
+4. 3번 소스에 대해 데이터 생성부분을 일부 수정하여 
+다음 세 가지 경우에 대해 성능측정을 하여 비교하라. 
+그리고 selection sort 알고리즘의 경우 worst-case, best-case, average-case data의 구분이 있는지 기술하라.
+(1) 입력데이터가 내림차순 정렬이 이미 되어 있는 경우(3번 결과 사용)
 */
 #include <stdio.h>
 #include <time.h>
@@ -11,7 +13,7 @@ void selectionSort(int *ary, int size);
 
 int main(void)
 {
-    FILE *fp = fopen("output.csv","w");
+    FILE *fp = fopen("output4-1.csv","w");
     int i, n, step = 10;
     int a[MAX_SIZE];
     double duration;

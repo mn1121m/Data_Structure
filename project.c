@@ -9,7 +9,7 @@ int main(void)
 
     fprintf(fp, "n,time\n");
     for(i = 0; i < 100; i ++) {
-        fprintf(fp "%d,%d\n", i, i*i);
+        fprintf(fp, "%d,%d\n", i, i*i);
     }
 
     fclose(fp);
