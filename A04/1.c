@@ -30,6 +30,7 @@ int main(void)
     for(i = 0; i < num; i++ )
         printf("ipp[%d] = %d ", i, ipp[i]);
     printf("\n");
+    
     return 0;
 }
 
