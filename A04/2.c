@@ -38,6 +38,7 @@ int main(void)
     printf("\n");
     return 0; // break point 설정
 }
+// 반환값이 int **이기 때문에 함수원형도 " int ** " 으로 반환해줘야한다.
 int **make2dArray(int row, int col)
 {
     int **temp, i, j;
