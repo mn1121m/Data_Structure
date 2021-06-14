@@ -17,12 +17,13 @@ typedef struct _humanbeing {
     float salary;
 } humanBeing;
 
-int humansEqual(humanBeing person1, humanBeing person2);
+int humansEqual(humanBeing *person1, humanBeing *person2);
 
 int main(void)
 {
     humanBeing person1, person2;
     int flag;
+
     printf("Input person1's name, age, salary :\n");
     fgets(person1.name, sizeof(person1.name), stdin);
     scanf("%d", &person1.age);
@@ -34,7 +35,7 @@ int main(void)
     scanf("%d", &person2.age);
     scanf("%f", &person2.salary);
 
-    flag = humansEqual(person1, person2);
+    flag = humansEqual(&person1, &person2);
 
     if(flag)
         printf("The to human beings are the same\n");
@@ -42,13 +43,13 @@ int main(void)
         printf("The to human beings are not the same\n");
     return 0;
 }
-int humansEqual(humanBeing person1, humanBeing person2)
+int humansEqual(humanBeing *person1, humanBeing *person2)
 {
-    if(strcmp(person1.name, person2.name))
+    if(strcmp(person1->name, person2->name))
         return FALSE;
-    if(person1.age != person2.age)
+    if(person1->age != person2->age)
         return FALSE;
-    if(person1.salary != person2.salary)
+    if(person1->salary != person2->salary)
         return FALSE;
     return TRUE;  
 }
