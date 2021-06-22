@@ -11,6 +11,17 @@ rand()함수를 이용하여 위치와 값을 설정하도록 하시오.
 - 질문 -
 + Random generated Matrix(20,20) 에서 rand()함수를 이용해서 
 위치와 값을 매번 다르게 설정하는 방법을 모르겠습니다.
+
+힌트)
+for i = 0 to row :
+    for j = 0 to col :
+        if cur.row == i and cur.col == j
+            print(cur.value)
+            cur <- cur_next
+        else
+            print(0)
+    print('\n');
+
 */
 /* 
 cf) rand() 함수 
@@ -34,8 +45,6 @@ typedef struct _term {
 } term;
 term a[MAX_TERMS];
 
-void print_sparse_matrix(term *ary, int size);
-
 int main(void)
 {
     int num, i;
@@ -45,6 +54,11 @@ int main(void)
 
     printf("Random generated Matrix(20, 20)\n");
     
+    for(i = 0; i < MAX_ROWS; i++) {
+        for(j = 0; j < MAX_COLS; j++) {
+            if()
+        }
+    }
 
     return 0;
 }
