@@ -45,7 +45,21 @@ element queueEmpty()
 
 int main(void)
 {
+    printf("<< linear queue operations where MAX_QUEUE_SIZE is 3 >>\n");
+    printf("add 1 Jung\n");
+    printf("delete\n");
+    printf("printq\n");
 
+    printf("**************************************************\n");
+    while(TRUE) {
+        //push
+        scanf("%d %s", queue[i].id, queue[i].name);
+        i++;
+        if(i > MAX_QUEUE_SIZE -1 ) {
+            stackFULL();
+            break;
+        }
+    }
 
     return 0;
 }
