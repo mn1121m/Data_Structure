@@ -9,7 +9,8 @@
 
 - 질문 -
 + 실행 예시에서 다음과 같이 -> ex) 11 9, 9 5, 3 3, 7 2, 9 0
-    ',' 를 이용해서 구분하였는데, 그럴 때는 어떻게 구분해서 입력할 수 있는건지 설명좀 부탁드리겠습니다.
+    ',' 를 이용해서 구분하였는데, 그럴 때는 어떻게 구분해서 입력할 수 있는건가요 ?
+-> scanf("%f %d,", ~~~) 처럼 %d 뒤에 ,를 붙여주면 된다.
 
 <복습> - check 
 + print_add() 구현하는 과정
@@ -50,13 +51,13 @@ int main(void)
     startA = 0;
     finishA = A_number -1;
     for(i = startA; i <= finishA; i++) {
-        scanf("%f %d", &terms[i].coef, &terms[i].expon);
+        scanf("%f %d,", &terms[i].coef, &terms[i].expon);   //%d뒤에 , 써주면 ',' 구분된다.
     }
     printf("coefficient and exponent of B(x) = 10x^3+8x^2+3 (10 3, 8 2, 3 0): ");
     startB = A_number;
     finishB = A_number + B_number - 1;
     for(i = startB; i <= finishB; i++) {
-        scanf("%f %d", &terms[i].coef, &terms[i].expon);
+        scanf("%f %d,", &terms[i].coef, &terms[i].expon);    //%d뒤에 , 써주면 ',' 구분된다.
     }
     avail = finishB + 1;
     //  padd
@@ -143,9 +144,9 @@ Input the number of items of B(x) : 3
 
 Input in descending order
 
-coefficient and exponent of A(x) = 10x^3+8x^2+3 (10 3, 8 2, 3 0): 11 9 9 5 3 3 7 2 9 0
-coefficient and exponent of B(x) = 10x^3+8x^2+3 (10 3, 8 2, 3 0): 10 9 5 3 5 2
-A(x) = 11x^9+9x^5+3x^3+7x^2+9
-B(x) = 10x^9+5x^3+5x^2
-C(x) = 21x^9+9x^5+8x^3+12x^2+9
+coefficient and exponent of A(x) = 10x^3+8x^2+3 (10 3, 8 2, 3 0): 11 9, 9 5, 3 3, 7 2, 9 0
+coefficient and exponent of B(x) = 10x^3+8x^2+3 (10 3, 8 2, 3 0): 10 9, 5 3, 5 2
+A(x) = 11x^9+9x^5 +3x^3 +7x^2 +9 
+B(x) = 10x^9+5x^3 +5x^2 
+C(x) = 21x^9+9x^5 +8x^3 +12x^2 +9
 */

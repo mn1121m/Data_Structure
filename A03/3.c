@@ -1,6 +1,9 @@
 /*
-3. 다음 Program 1.25를 사용하여 선택정렬(Selection Sort)에 대한 성능측정을 하라. 그리 고 프로그램의 실행결과를 이용하여 그래프를 작성하라. 또한, 문제 2의 결과와 같이 하나의 그래프로 작성해서 비교해 보라.
+3. 다음 Program 1.25를 사용하여 선택정렬(Selection Sort)에 대한 성능측정을 하라. 
+그리고 프로그램의 실행결과를 이용하여 그래프를 작성하라. 
+또한, 문제 2의 결과와 같이 하나의 그래프로 작성해서 비교해 보라.
 
+*중요* - ',' 로 구분해서 출력하면 .csv 에서는 열이 구분되어 값이 표시된다. => 콤마로 나눠진다.
 */
 #include <stdio.h>
 #include <time.h>
@@ -17,7 +20,7 @@ int main(void)
     double duration;
 
     /*times for n = 0, ..., 100, 200, ..., 1000 */
-    fprintf(fp, "    n   repetitions     time\n");
+    fprintf(fp, "n,repetitions,time\n");
     for(n = 0; n <= 1000; n += step) {
         /* get time for size n */
         long repetitions = 0;
@@ -35,7 +38,7 @@ int main(void)
         
         duration = ((double) (clock() - start)) / CLOCKS_PER_SEC;
         duration /= repetitions;
-        fprintf(fp, "%6d %9d\t%f\n", n, repetitions, duration);
+        fprintf(fp, "%6d,%9ld,%f\n", n, repetitions, duration);
         if(n == 100) step = 100;
     }
     fclose(fp);

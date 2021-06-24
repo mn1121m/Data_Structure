@@ -4,6 +4,7 @@
 그리고 selection sort 알고리즘의 경우 worst-case, best-case, average-case data의 구분이 있는지 기술하라.
 (2) 입력데이터가 오름차순 정렬이 이미 되어 있는 경우 [ 프로젝트명: 4-2 ]
 */
+
 #include <stdio.h>
 #include <time.h>
 
@@ -19,7 +20,7 @@ int main(void)
     double duration;
 
     /*times for n = 0, ..., 100, 200, ..., 1000 */
-    fprintf(fp, "    n   repetitions     time\n");
+    fprintf(fp, "n,repetitions,time\n");
     for(n = 0; n <= 1000; n += step) {
         /* get time for size n */
         long repetitions = 0;
@@ -37,7 +38,7 @@ int main(void)
         
         duration = ((double) (clock() - start)) / CLOCKS_PER_SEC;
         duration /= repetitions;
-        fprintf(fp, "%6d %9d\t%f\n", n, repetitions, duration);
+        fprintf(fp, "%6d,%9ld,%f\n", n, repetitions, duration);
         if(n == 100) step = 100;
     }
     fclose(fp);

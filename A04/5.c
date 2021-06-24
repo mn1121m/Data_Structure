@@ -6,9 +6,15 @@
 1 각 다항식을 사용자로부터 키보드 입력을 받음 
 2 다항식을 출력하는 함수를 정의하여 사용하기
 
-- 질문 -
-문제에서 void poly_print(char [], polynomial p) <-- 
-    char[]을 어떻게 해야할지 몰라서 제 방식대로 일단 풀기는 했는데, char[]로 하려면 어떻게 풀어야하는지 설명좀 부탁드리겠습니다!
+- 참고 -
+문제에서 "void poly_print(char [], polynomial p)" 에서
+    poly_print("A(x) = ", A); <- 처럼 
+    char[] = "A(x) = " 를 뜻한다.
+
+- 추가질문 - 
+void poly_print(char [], polynomial p) 으로 코딩을 하라고 했습니다.
+    저는 일단 변수를 지정해서 char x[] 로 하고,
+    아래처럼 printf("%s", x); <- 로 구현했는데, 이렇게 말고 변수 없이 char []로 어떻게 출력해야 하나요 ?
 */
 
 #include <stdio.h>
@@ -23,7 +29,7 @@ typedef struct _polynomial {
 } polynomial;
 
 polynomial poly_add(polynomial A, polynomial B);
-void poly_print(polynomial p);
+void poly_print(char x[], polynomial p);
 
 int main(void)
 {
@@ -50,9 +56,9 @@ int main(void)
     C = poly_add(A, B);
 
     //  print
-    printf("A(x) = "); poly_print(A);
-    printf("B(x) = "); poly_print(B);
-    printf("C(x) = "); poly_print(C);
+    poly_print("A(x) = ", A);
+    poly_print("B(x) = ", B);
+    poly_print("C(x) = ", C);
     return 0;
 }
 polynomial poly_add(polynomial A, polynomial B)
@@ -81,10 +87,11 @@ polynomial poly_add(polynomial A, polynomial B)
     }
     return C;
 }
-void poly_print(polynomial p)
+void poly_print(char x[], polynomial p)
 {
     int i;
 
+    printf("%s", x);
     //출력 : 높은 차수 -> 낮은 차수 
     for(i = p.degree; i > 0; i--) {
         printf("%dx^%d + ", (int)p.coef[p.degree-i], i);

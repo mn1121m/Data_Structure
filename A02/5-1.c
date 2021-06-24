@@ -60,7 +60,7 @@ void selection_sort(int *ary, int size)
         for(j = i+1; j < size; j++) 
             if(ary[minIdx] > ary[j])
                 minIdx = j;
-        swap(&ary[i], &ary[minIdx], &temp);
+        swap(&ary[i], &ary[minIdx], &temp); //중요 주소값을 전달해서 포인터를 이용하여 값을 변경한다. 
     }
 }
 int binary_sort(int *ary, int size, int value)
