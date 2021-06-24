@@ -8,14 +8,16 @@
 4 사용자로부터 임의의 정수를 입력받는다.
 5 입력받은 정수가 배열에 있는지 이진탐색(binary search)을 수행하여 그 결과를 출력한다.
 
-- 질문 - 
-compare 을 어떻게 해야할지 몰라서 일단 없이 구현했습니다.
+다시()
+*cf) COMPARE 쓰는 이유: strcmp같은 함수도 이용할때 쓸 수있기 때문.
+
 */
 #include <stdio.h>
 
 #define MAX_ARY_SIZE 128
+#define COMPARE(x, y) ( (x) > (y) ? 1: (x < y ? -1 : 0 ) )
 
-void swap(int *a, int *b);
+void swap(int *a, int *b, int *temp);
 void selection_sort(int *ary, int size);
 int binary_sort(int *ary, int size, int value);
 void print_ary(int *ary, int size);
@@ -31,8 +33,8 @@ int main(void)
         scanf("%d", &ary[i]);
     }
 
-    selection_sort(ary, n);
     printf("\nSorted array:\n");
+    selection_sort(ary, n);
     print_ary(ary, n);
 
     printf("\nEnter the number to search : ");
@@ -43,13 +45,11 @@ int main(void)
 
     return 0;
 }
-void swap(int *a, int *b)
+void swap(int *a, int *b, int *temp)
 {
-    int temp;
-
-    temp = *a;
+    *temp = *a;
     *a = *b;
-    *b = temp;
+    *b = *temp;
 }
 void selection_sort(int *ary, int size)
 {
@@ -60,7 +60,7 @@ void selection_sort(int *ary, int size)
         for(j = i+1; j < size; j++) 
             if(ary[minIdx] > ary[j])
                 minIdx = j;
-        swap(&i, &minIdx);
+        swap(&ary[i], &ary[minIdx], &temp);
     }
 }
 int binary_sort(int *ary, int size, int value)
@@ -69,9 +69,14 @@ int binary_sort(int *ary, int size, int value)
 
     while(left <= right) {
         middle = (left + right) / 2;
-        if(ary[middle] > value) right = middle - 1;
-        else if(ary[middle] == value) return middle;
-        else left = middle + 1;
+        switch(COMPARE(ary[middle], value)) {
+            case 1: right = middle - 1;    break;
+            case 0: return middle; break;
+            case -1: left = middle + 1;    break;
+        }
+        // if(ary[middle] > value) right = middle - 1;
+        // else if(ary[middle] == value) return middle;
+        // else left = middle + 1;
     }
     return -1;
 }

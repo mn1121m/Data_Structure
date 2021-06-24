@@ -44,8 +44,8 @@ int main(void)
     printf("**************************************************\n");
     while(TRUE) {
         //push
-        fgets(buf, sizeof(buf), stdin);
-        buf[strlen(buf) - 1] = '\0';
+        fgets(buf, sizeof(buf), stdin); //enter포함하고 있음. '\n'
+        buf[strlen(buf) - 1] = '\0';    //enter포함하고 있는 '\n' 자리에 '\0'을 넣어버리면 됩니다.
 
         token = strtok(buf, delemeter);
         if(strcmp(token, "push") == 0) {

@@ -11,14 +11,13 @@
 4 사용자로부터 임의의 정수를 입력받는다.
 5 입력받은 정수가 배열에 있는지 이진탐색(binary search)을 수행하여 그 결과를 출력한다.
 
-- 질문 - 
-COMPARE 을 어떻게 해야할지 몰라서 일단 없이 구현했습니다.
+다시()
 */
 #include <stdio.h>
 
 #define MAX_ARY_SIZE 128
-
 #define SWAP(x, y, temp) ( (temp)=(x), (x)=(y), (y)=(temp) )
+#define COMPARE(x, y) ( (x) > (y) ? 1: (x < y ? -1 : 0 )) 
 
 void selection_sort(int *ary, int size);
 int binary_sortR(int *ary, int left, int right, int value);
@@ -63,12 +62,23 @@ int binary_sortR(int *ary, int left, int right, int value)
     int middle = (left + right) / 2;
 
     if(left <= right) {
-        if(ary[middle] > value) 
-            return binary_sortR(ary, 0, middle - 1, value);
-        else if(ary[middle] == value)
-            return middle;
-        else
-            return binary_sortR(ary, middle + 1, right, value);
+        switch(COMPARE(ary[middle], value)) {
+            case 1: 
+                return binary_sortR(ary, 0, middle - 1, value); 
+                break;
+            case 0: 
+                return middle; 
+                break;
+            case -1:
+                return binary_sortR(ary, middle + 1, right, value); 
+                break;
+        }
+        // if(ary[middle] > value) 
+        //     return binary_sortR(ary, 0, middle - 1, value);
+        // else if(ary[middle] == value)
+        //     return middle;
+        // else
+        //     return binary_sortR(ary, middle + 1, right, value);
     }
     return -1;
 }
@@ -90,4 +100,12 @@ Sorted array:
 
 Enter the number to search : 962
 The search number is present in  list[9]% 
+
+Enter the number of numbers to generate : 10
+1 4 5 2 3 7 6 9 8 10
+
+Sorted array:
+1 2 3 4 5 6 7 8 9 10 
+
+Enter the number to search : 10
 */

@@ -16,7 +16,14 @@ int sumAry3D_f3(int ary[2][2][3], int SEC, int ROW, int COL);
 
 int main(void) 
 {
-    int ary3D[ ][2][3] = { {{1, 2, 3}, {4, 5, 6}}, {{7, 8, 9}, {10, 11, 12}} };
+    int ary3D[ ][2][3] = {
+        {
+             {1, 2, 3},
+             {4, 5, 6} 
+        },{
+            {7, 8, 9},
+            {10, 11, 12}
+        }};
 
     int sec_size = sizeof(ary3D) / sizeof(ary3D[0]);
     int row_size = sizeof(ary3D[0]) / sizeof(ary3D[0][0]);

@@ -17,7 +17,8 @@ int main(void)
     pi = (int *)malloc(sizeof(int));
     pf = (float *)malloc(sizeof(float));
 
-    if((pi = (int *)malloc(sizeof(int))) == NULL || (pf = (float*)malloc(sizeof(float))) == NULL) {
+    if((pi = (int *)malloc(sizeof(int))) == NULL 
+        || (pf = (float*)malloc(sizeof(float))) == NULL) {
         fprintf(stderr, "Insufficient memory\n");
         exit(EXIT_FAILURE);
     }
