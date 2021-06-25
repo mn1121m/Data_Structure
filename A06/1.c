@@ -5,7 +5,7 @@
 
 - 질문 -
 
-다시() - strtok, gets, strcmp, strlen
+다시() - strtok, gets, strcmp, strlen 
 */
 
 #include <stdio.h>
