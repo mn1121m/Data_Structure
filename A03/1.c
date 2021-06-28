@@ -5,23 +5,22 @@
 1. 다음 프로그램의 func1, func2, func3을 정의한 후 실행되도록 구현하라.
 
 다시() - *p, fun2(), fun3()
-- 추가질문 -
-+ A01 ~ A04 Code review에서 cd A02로 하셔서 출력이 잘못나왔습니다.
-+ 아래와 같은 warning이 나오는데 어떻게 수정해야하는건가요 ?
+
 1.c:45:1: warning: non-void function does not return a value [-Wreturn-type]
 }
 ^
 1.c:49:1: warning: non-void function does not return a value [-Wreturn-type]
 }
-
+=> non-void funcion : return을 해야한다.
+void * type가 있기 때문에 error가 생기는 것이다. 
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 
 int *func1();
-void *func2(int *p);
-void **func3(int **p);
+void func2(int *p);
+void func3(int **p);
 
 int main(void)
 {
@@ -48,11 +47,11 @@ int *func1()
 
     return p;
 }
-void *func2(int *p)
+void func2(int *p)
 {
     *p = 100;
 }
-void **func3(int **p)
+void func3(int **p)
 {
     **p = 200;
 }
