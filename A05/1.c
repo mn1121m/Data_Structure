@@ -7,10 +7,56 @@ rand()함수를 이용하여 위치와 값을 설정하도록 하시오.
 (매번 수행시마다 서 로 다른 희소행렬이 만들어져야함), 
 이 행렬을 이용하여, 배열의 공간을 절약하기 위한 희소행 렬을 만들고 출력하시오.
 
-소요: 2H
-- 질문 -
-+ Random generated Matrix(20,20) 에서 rand()함수를 이용해서 
-위치와 값을 매번 다르게 설정하는 방법을 모르겠습니다.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define ROW 20
+#define COL 20
+#define MAX_TERMS 101   /* maximum numer of terms + 1 */
+
+// Data structure
+
+// Functions
+void createAry();
+void printAry(int ary[20][20]);
+void ary2SparseMat();
+void printSparseMat();
+
+// Global variable
+int ary[ROW][COL];
+
+int main(void)
+{
+    int n;
+
+    printf("Press the numver of a elements : ");
+    scanf("%d", &n);
+
+    createAry();
+    printf("Random generated Matrix(20,20)\n");
+    printAry();
+
+    ary2SparseMat();
+    printSparseMat();
+    return 0;
+}
+void createAry()
+{
+
+}
+void printAry(int ary[20][20]);
+void ary2SparseMat();
+/* 
+cf) rand() 함수 
+    //srand(time(NULL));
+    
+    // for(i = 1; i <= 10; i++) 
+    //     printf("%d ", (rand() % 100) + 1);
+    // printf("\n");
+
 
 힌트)
 for i = 0 to row :
@@ -23,42 +69,3 @@ for i = 0 to row :
     print('\n');
 
 */
-/* 
-cf) rand() 함수 
-    //srand(time(NULL));
-    
-    // for(i = 1; i <= 10; i++) 
-    //     printf("%d ", (rand() % 100) + 1);
-    // printf("\n");
-
-*/
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
-#define MAX_ROWS 20
-#define MAX_COLS 20
-#define MAX_TERMS 101   /* maximum numer of terms + 1 */
-
-typedef struct _term {
-    int row, col, value;
-} term;
-term a[MAX_TERMS];
-
-int main(void)
-{
-    int num, i;
-
-    printf("원소의 개수를 쓰시오 : ");
-    scanf("%d", &num);
-
-    printf("Random generated Matrix(20, 20)\n");
-    
-    for(i = 0; i < MAX_ROWS; i++) {
-        for(j = 0; j < MAX_COLS; j++) {
-            if()
-        }
-    }
-
-    return 0;
-}

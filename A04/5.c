@@ -11,10 +11,9 @@
     poly_print("A(x) = ", A); <- 처럼 
     char[] = "A(x) = " 를 뜻한다.
 
-- 추가질문 - 
-void poly_print(char [], polynomial p) 으로 코딩을 하라고 했습니다.
-    저는 일단 변수를 지정해서 char x[] 로 하고,
-    아래처럼 printf("%s", x); <- 로 구현했는데, 이렇게 말고 변수 없이 char []로 어떻게 출력해야 하나요 ?
+void poly_print(const char *x , polynomial p) 으로 코딩을 하라고 했습니다.
+     char [] -> const char *x  / char x[] (변수 : x)
+     const 쓴 이유 : 읽기모드로 들어오는 값들은 const를 쓴다. (상수다)
 */
 
 #include <stdio.h>
@@ -29,7 +28,7 @@ typedef struct _polynomial {
 } polynomial;
 
 polynomial poly_add(polynomial A, polynomial B);
-void poly_print(char x[], polynomial p);
+void poly_print(const char *x, polynomial p);
 
 int main(void)
 {
@@ -87,7 +86,7 @@ polynomial poly_add(polynomial A, polynomial B)
     }
     return C;
 }
-void poly_print(char x[], polynomial p)
+void poly_print(const char *x, polynomial p)
 {
     int i;
 

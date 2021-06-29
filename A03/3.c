@@ -30,7 +30,7 @@ int main(void)
 
             /* inisialize with worst-case data */ 
             for( i = 0; i < n ; i++)
-                a[i] = n - i;
+                a[i] = n - i;   // 10 9 8 7 ...
 
             selectionSort(a, n);
         } while(clock() - start < 1000);

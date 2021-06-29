@@ -3,6 +3,7 @@
 다음 세 가지 경우에 대해 성능측정을 하여 비교하라. 
 그리고 selection sort 알고리즘의 경우 worst-case, best-case, average-case data의 구분이 있는지 기술하라.
 (2) 입력데이터가 오름차순 정렬이 이미 되어 있는 경우 [ 프로젝트명: 4-2 ]
+1 2 3 4 5 ... 10
 */
 
 #include <stdio.h>
@@ -28,9 +29,9 @@ int main(void)
         do {
             repetitions++;
 
-            /* inisialize with worst-case data */ 
+            /* inisialize with best-case data */ 
             for( i = 0; i < n ; i++)
-                a[i] = n - i;
+                a[i] = i;   // 1 2 3 4 5 ... 10 
 
             selectionSort(a, n);
         } while(clock() - start < 1000);
