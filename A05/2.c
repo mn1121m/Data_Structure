@@ -1,116 +1,62 @@
-/*
-05. 다항식더하기, 전치행렬구하기
+/* 2번 복습
+05. 다항식더하기, 전치행렬구하기 - 1번 응용
 
 2. 다음 희소행렬(sparse matrix)에 대한 전치행렬(transpose matrix)을 구하는 함수로 
 Program 2.9 fastTranspose를 구현하여 실행결과를 보여라.
 
-- 추가질문-
-
-문제처럼 "파일 처리" 함수를 이용하여 구현하는 방법에 대해서 잘 모르겠습니다.
-"파일 처리"에 개념은 아는데 개념을 이용해서 풀이하는 방법이 어렵습니다.
+- 질문 - 
++ fast_transpose() 안에서 
+맨마지막 조건문에서  j = startingPos[a[i].col]++; << 이게 a와 b를 바꾸고 난뒤 j에 +1를 하는거죠 ?
 */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
-#define MAX_TERM_SIZE 401   /* maximum numer of terms + 1 */
-
-#define ROW 6
-#define COL 6
-
-#define TRUE 1
-#define FALSE 0
-
-// Data structure
-
+#define MAX_TERM_SIZE 401 
+#define MAX_COL 6
+//Data strutrue
 typedef struct {
     int row;
     int col;
     int value;
 } term;
 
-// Functions
-void createAry(int n);
-void ary2SparseMat();
-void printSparseMat(term x[]);
-void printMat(term x[]);
-
-void fast_transpose();
-
-// Global variable
-int ary[ROW][COL];
-int flag[ROW][COL];     // 중복된값을 판단하기 위해 사용, 기본적으로 false으로 저장됨.
+//Global variable
 term a[MAX_TERM_SIZE];
 term b[MAX_TERM_SIZE];
 
+//Function
+void readSparseMat(FILE *fp, term *mat);
+void printMat(term x[]);
+void fast_transpose();
+
 int main(void)
 {
-    int n;
+    FILE *fp = NULL;
 
-    printf("Press the numver of a elements : ");
-    scanf("%d", &n);
-
-    createAry(n);
-    ary2SparseMat();
-
+    //Get filename
+    if((fp = fopen("a.txt", "r")) == NULL) {
+        fprintf(stderr, "no file name.\n");
+        exit(EXIT_FAILURE);
+    }
+    readSparseMat(fp, a);
+    fclose(fp);
+    
     printf("A\n");
-    //printSparseMat(a);
     printMat(a);
 
     printf("\nB\n");
     fast_transpose();
-    //printSparseMat(b);
     printMat(b);
     return 0;
 }
-void createAry(int n)
-{
-    int row, col;
-    int i;
-
-    srand(time(NULL));
-
-    for(i = 0; i < n; i ++) {
-        //중복처리
-        row = rand() % ROW;
-        col = rand() % COL;
-        while(flag[row][col]) {    //값이 있으면(TRUE) 다시 뽑으라는 의미이다. flag = FALSE일때 반복문을 빠져나온다.
-            row = rand() % ROW;
-            col = rand() % COL;
-        }
-        flag[row][col] = TRUE;
-        ary[row][col] = rand() % 100 + 1;     //value = rand() % 100 + 1
-    }
-}
-
-void ary2SparseMat()
-{
-    int row, col, numValue = 1;
-    int i, j;
-
-    row = ROW;
-    col = COL;
-
-    for(i = 0; i < ROW; i++) {
-        for(j = 0; j < COL; j++) {
-            if(ary[i][j]) {
-                a[numValue].row = i;
-                a[numValue].col = j;
-                a[numValue++].value = ary[i][j];
-            }
-        }
-    }
-    a[0].row = row;
-    a[0].col = col;
-    a[0].value = numValue - 1;
-}
-void printSparseMat(term x[])
+void readSparseMat(FILE *fp, term *mat)
 {
     int i;
 
-    for(i = 0; i <= x[0].value; i++) {
-        printf("%3d,\t%3d\t%3d\n", x[i].row, x[i].col, x[i].value);
+    fscanf(fp, "%d %d %d", &(mat[0].row), &(mat[0].col), &(mat[0].value));
+    for(i = 1; i <= mat[0].value; i++) {
+        fscanf(fp, "%d %d %d", &(mat[i].row), &(mat[i].col), &(mat[i].value));
     }
 }
 void printMat(term x[])
@@ -118,55 +64,55 @@ void printMat(term x[])
     int i, j, count = 1;
 
     for(i = 0; i < x[0].row; i++) {
-        for(j = 0; j < x[0].col; j++)
-            if(i == x[count].row && j == x[count].col)
+        for(j = 0; j < x[0].col; j ++) {
+            if(i == x[count].row && j == x[count].col) {
                 printf("%3d ", x[count++].value);
-            else
+            }else 
                 printf("%3d ", 0);
+        }
         putchar('\n');
     }
 }
 void fast_transpose()
 {
-    int rowTerms[MAX_TERM_SIZE],  startingPos[MAX_TERM_SIZE];
-    int i,j, numCols = a[0].col, numTerms = a[0].value;
-    b[0].row = numCols; b[0].col = a[0].row;
+    int rowTerms[MAX_COL], startingPos[MAX_COL];
+    int i, j, numCols = a[0].col, numTerms = a[0].value;
+    b[0].row = numCols, b[0].col = a[0].row;
     b[0].value = numTerms;
-    
-    if(numTerms > 0){
-        for(i = 0; i < numCols; i++){
+
+    if(numTerms > 0) {
+        for(i = 0; i < numCols; i++) {
             rowTerms[i] = 0;
         }
-        for(i = 1; i <= numTerms; i++){
+        for(i = 1; i <= numTerms; i++) {
             rowTerms[a[i].col]++;
         }
         startingPos[0] = 1;
-        for(i = 1; i< numCols; i++){
-            startingPos[i] = startingPos[i-1] + rowTerms[i-1];
+        for(i = 1; i < numCols; i++) {
+            startingPos[i] = rowTerms[i-1] + startingPos[i-1];
         }
-        for(i = 1; i <= numTerms; i++){
+        /*중요*/
+        for(i = 1; i <= numTerms; i++) {
             j = startingPos[a[i].col]++;
-            b[j].row = a[i].col; b[j].col = a[i].row;
+            b[j].row = a[i].col, b[j].col = a[i].row;
             b[j].value = a[i].value;
-            
         }
     }
 }
-/*
-Press the numver of a elements : 8
+/* 결과
 A
-  0   0   0   0  90   0 
-  0   0   0   0  48   0 
+ 15   0   0  22   0 -15 
+  0  11   3   0   0   0 
+  0   0   0  -6   0   0 
   0   0   0   0   0   0 
-  0   0  11  95   0  72 
-  0   0  31  42   0   0 
-  0   0   0   0  72   0 
+ 91   0   0   0   0   0 
+  0   0  28   0   0   0 
 
 B
+ 15   0   0   0  91   0 
+  0  11   0   0   0   0 
+  0   3   0   0   0  28 
+ 22   0  -6   0   0   0 
   0   0   0   0   0   0 
-  0   0   0   0   0   0 
-  0   0   0  11  31   0 
-  0   0   0  95  42   0 
- 90  48   0   0   0  72 
-  0   0   0  72   0   0 
+-15   0   0   0   0   0 
 */

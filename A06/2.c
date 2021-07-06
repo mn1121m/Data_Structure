@@ -2,14 +2,8 @@
 2. [ 정적할당배열을 이용한 선형큐(linear queue) ] 다음과 같은 선형 큐를 생성하고 실행 예와 같이 수행되는 프로그램을 작성하라. 
 이를 위해, addq, deleteq, queueFull, queueEmpty qprint(queue의 내용을 출력) 함수를 구현하여야 한다.
 
-
-- 질문 - 
-
-+ 2번문제 [자료형과 함수의 정의] 에서는 #define MAX_QUEUE_SIZE 5 인데, 
-    밑에 출력예시에서는 맨 처음 줄에 << linear queue ~ MAX_QUEUE_SIZE is 3>> 크기가 3이라고 되어 있습니다.
-    MAX_QUEUE_SIZE 3이 맞는건가요 ?
-+ 구현조건 - 3번에서 "그 이외에 대해서는 큐의 항목들을 이동" 에 대한 구현을 그림을 그려봐도 잘 이해가 되질 않습니다..
-
+*중요*
+조건 - 3 : 그 이외에 대해서는 큐의 항목들을 이동 -> *구현* (필기 참고)
 */
 
 #include <stdio.h>
@@ -97,11 +91,16 @@ void queueFULL()
         exit(EXIT_FAILURE);
     } else { // *중요* 그 이외에 대해서는 큐의 항목들을 이동 
         puts("array shifting...");
-        //한칸씩 앞으로 이동 
-        
-        //한칸씩 앞으로 이동 후 
-        front--;
-        rear--;
+        //전체적으로 앞으로 한칸씩 이동
+        for(i = front +1; i <= rear; i++) { 
+            queue[i - front - 1] = queue[i];
+        }
+        rear = -1 + (rear - front); // number of element = (rear - front)
+        front = -1;
+        // 다른 풀이식
+        // for(i = 0; i < rear - front; i++) {
+        //     queue[i] = queue[i + front + 1]
+        // }
     }
     
 }
@@ -131,3 +130,47 @@ void qprint()
     }
     putchar('\n');
 }
+/*
+결과
+<< linear queue operations where MAX_QUEUE_SIZE is 3 >>
+add 1 Jung
+delete
+printq
+**************************************************
+warning: this program uses gets(), which is unsafe.
+add 1 kim
+add 3 hong
+add 5 kor
+qprint
+[DEBUG] : front == -1
+[DEBUG] : rear == 2
+1 kim
+3 hong
+5 kor
+
+delete
+qprint
+[DEBUG] : front == 0
+[DEBUG] : rear == 2
+3 hong
+5 kor
+
+add 7 America
+array shifting...
+qprint
+[DEBUG] : front == -1
+[DEBUG] : rear == 2
+3 hong
+5 kor
+7 America
+
+add 8 park
+Queue is full, cannot add element
+current queue element : 
+[DEBUG] : i == 0
+3 hong
+[DEBUG] : i == 1
+5 kor
+[DEBUG] : i == 2
+7 America
+*/
