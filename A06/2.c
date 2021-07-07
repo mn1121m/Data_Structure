@@ -37,7 +37,6 @@ void qprint();
 
 int main(void)
 {
-    int i = 0;
     char buf[MAX_BUF_SIZE];
     char *ptr, *delimeter = " ";
     element temp;
@@ -64,8 +63,6 @@ int main(void)
             puts("Wrong command! try again!");
         }
     }
-    
-
     return 0;
 }
 void addq(element item)

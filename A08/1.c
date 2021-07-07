@@ -9,8 +9,7 @@
             switch(token) {
                    ^
 그리고 결과가 다음과 같이 뜹니다.
-=> zsh: floating point exception  ./main
-어떤 의미이고, 어떻게 고쳐야 하는건가요 ?
+=> zsh: floating point exception  ./main -> 어떤게 문제인지 모르겠습니다.
 */
 
 #include <stdio.h>
