@@ -44,35 +44,35 @@ int main(void)
     insertWithOrder(&first, createNode(5, NULL));
     insertWithOrder(&first, createNode(-4, NULL));
     insertWithOrder(&first, createNode(3453, NULL));
-    printList(first);
+    printf("시작 : ");printList(first);
     putchar('\n');
 
     // 실패한 경우 ( deleteItem(&first, 3) == 0(성공했을때 : return 0) ) 
     if(deleteItem(&first, 3)) { 
         printf("Error!\n");
-    }
-    printf("Removed!\n");
+    }else
+        printf("Removed!\n");
     printList(first);
     putchar('\n');
 
     if(deleteItem(&first, -4)) { 
         printf("Error!\n");
-    }
-    printf("Removed!\n");
+    }else
+        printf("Removed!\n");
     printList(first);
     putchar('\n');
 
     if(deleteItem(&first, 3453)) { 
         printf("Error!\n");
-    }
-    printf("Removed!\n");
+    }else
+        printf("Removed!\n");
     printList(first);
     putchar('\n');
 
     if(deleteItem(&first, 234)) { 
         printf("Error!\n");
-    }
-    printf("Removed!\n");
+    }else
+        printf("Removed!\n");
     printList(first);
     putchar('\n');
 
@@ -111,7 +111,7 @@ void insertWithOrder(listPointer *first, listPointer node)
         return;
     }
     while(TRUE) {
-        // Middle
+        // Middle (중간)
         if(p->data <= node->data && node->data < q->data) {
             p->link = node;
             node->link = q;

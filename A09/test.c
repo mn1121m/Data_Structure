@@ -28,7 +28,10 @@ listPointer createNode(int data, listPointer link);
 //Insertion
 void insert2First(listPointer *first, listPointer node);
 void insertWithOrder(listPointer *first, listPointer node);
-//Print
+//Delete
+int deleteFirst(listPointer *first);
+int deleteItem(listPointer *first, int data);
+//Display
 void printList(listPointer first);
 // Free
 void freeList(listPointer first);
@@ -36,17 +39,49 @@ void freeList(listPointer first);
 //main
 int main(void)
 {
-    printf("[DEBUG] : %d\n", 1);
+    // printf("[DEBUG] : %d\n", 1);
     //first = createNode(10, createNode(20, createNode(30, createNode(100, NULL))));
     insertWithOrder(&first, createNode(5, NULL));
     insertWithOrder(&first, createNode(1, NULL));
     insertWithOrder(&first, createNode(3, NULL));
+    insertWithOrder(&first, createNode(55, NULL));
     insertWithOrder(&first, createNode(100, NULL));
-    printf("[DEBUG] : %d\n", 2);
-    printList(first);
-    printf("[DEBUG] : %d\n", 3);
+
+    //deleteFirst(&first);
+    //1
+    if(deleteItem(&first, 101)) {
+        printf("Error!\n");
+    } else {
+        printf("Removed!\n");
+    }
+    printf("1. result : ");printList(first);
+    putchar('\n');
+    //2
+    if(deleteItem(&first, 3)) {
+        printf("Error!\n");
+    } else {
+        printf("Removed!\n");
+    }
+    printf("2. result : ");printList(first);
+    putchar('\n');
+    //3
+    if(deleteItem(&first, 100)) {
+        printf("Error!\n");
+    } else {
+        printf("Removed!\n");
+    }
+    printf("3. result : ");printList(first);
+    putchar('\n');
+    //4
+    if(deleteItem(&first, 50)) {
+        printf("Error!\n");
+    } else {
+        printf("Removed!\n");
+    }
+    printf("4. result : ");printList(first);
+    putchar('\n');
+
     freeList(first);
-    printf("[DEBUG] : %d\n", 4);
     return 0;
 }
 //Creation
@@ -65,10 +100,10 @@ void insert2First(listPointer *first, listPointer node)
     node->link = *first;
     *first = node;
 }
+
 void insertWithOrder(listPointer *first, listPointer node)
 {
     listPointer p, q;
-
     p = q = *first;
     //Empty
     if(!p) {
@@ -82,22 +117,60 @@ void insertWithOrder(listPointer *first, listPointer node)
         return;
     }
     while(TRUE) {
-        //Middle
+        // Middle
         if(p->data <= node->data && node->data < q->data) {
-            p->link = node;
             node->link = q;
+            p->link = node;         //*중요* Middle - 순서 상관없음.
             return;
         }
         p = q;
         q = q->link;
         //Right
-        if(!q) {
-            q->link = node;
+        if(q == NULL) {
+            p->link = node;
             return;
         }
     }
 }
-//Print
+//Delete
+int deleteFirst(listPointer *first)
+{
+    listPointer temp;
+    temp = *first;
+
+    if(*first) {
+        *first = (*first)->link;
+        free(temp);
+        return 0;
+    }
+    return -1;
+}
+int deleteItem(listPointer *first, int data)
+{
+    listPointer p, q;
+
+    p = q = *first;
+    //Left
+    if(p->data == data) {
+        *first = (*first)->link;
+        free(p);
+        return 0;
+    }
+    while(TRUE) {
+        //Middle, Right
+        if(q->data == data) {
+            p->link = q->link;
+            free(q);
+            return 0;
+        }
+        p = q;
+        q = q->link;
+        //No data
+        if(!q)
+            return -1;
+    }
+}
+//Display
 void printList(listPointer first)
 {
     int i;
