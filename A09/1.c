@@ -1,15 +1,16 @@
-/* 진행중
-자료구조응용
+/* Code review 0712 1:03~ Debugging 참고
+자료구조응용  
 09. 연결 리스트 : 기초, 스택, 큐
 1. 다음과 같이 정렬되지 않는 점수(정수 데이터)를 입력하면서 정렬된 Linked List를 만들고 실행예와 같이 수행되는 프로그램을 작성하라.
 
- - 질문 -
-+ delete함수 : 홀수 제거하는 구현과정에서 그림을 그리면서 했는데, 
-    => main(41300,0x117663dc0) malloc: *** error for object 0x7fdc934059f0: pointer being freed was not allocated
-    main(41300,0x117663dc0) malloc: *** set a breakpoint in malloc_error_break to debug
-    zsh: abort      ./main 
-    위와 같은 오류가 발생하여서 어떤게 원인인지 잘 모르겠습니다.
-+ 출력 -> 노드주소, 링크값  변환명세를 모르겠습니다. (%p인지 %x인지, 아니면 다른 것인지..)
+* 중요 *
++ zsh: abort      ./main      => 치명적인 오류 (건드리면 안되는 곳을 건드릴때 발생한다.)
++ 출력 -> 노드주소, 링크값  변환명세 => 주소 : %p, 값: %d
+
+- 참고 -
+[DEBUG]
+    printf("p == %d\nq == %d\n",p->data, q->data);
+    printf("1\n");
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,15 +61,15 @@ int main(void)
         fscanf(fp, "%d", &num);
         insertWithOrder(&first, createNode(num, NULL));
     }
-    printf("The ordered list contaons:\n");
+    printf("The ordered list contains:\n");
     printList(first);
     putchar('\n');putchar('\n');
 
-    //delete the odd value
+    //delete the odd value *중요*
     deleteItem(&first);
 
     printf("After deleting nodes with odd value\n\n");
-    printf("The ordered list contaons:\n");
+    printf("The ordered list contains:\n");
     printList(first);
     freeList(first);
     return 0;
@@ -122,17 +123,26 @@ void deleteItem(listPointer *first)
     listPointer p, q;
     p = q = *first;
 
-    for(; (*first); (*first)->link) {
-        //Left
-        if((p->data) % 2 == 1) {
-            *first = (*first)->link;
-            free(p);
-        }
-        //Middle, Right
-        if((q->data) % 2 == 1) {
+    //Empty list
+    if(!p) return;
+
+    //Start of list
+    while(p->data % 2) {
+        if(q) q = q->link;
+        free(p);
+        p = q;
+        *first = p;
+        if(!p) return;
+    }
+    while(q) {  //*q == NULL인지 아닌지
+        //Middle
+        while(q->data % 2) {
             p->link = q->link;
             free(q);
+            q = p->link;
         }
+        // End of list
+        if(!q) return;
         p = q;
         q = q->link;
     }
@@ -141,7 +151,7 @@ void deleteItem(listPointer *first)
 void printList(listPointer first)
 {
     for(; first; first = first->link) {
-        printf("(%p, %d, %p)", first, first->data, first->link);
+        printf("(%p, %2d, %p)\n", first, first->data, first->link);
     }
 }
     //Free

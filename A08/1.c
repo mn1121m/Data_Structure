@@ -1,15 +1,9 @@
 /* 자료구조응용 08. 스택과 큐
 1. 후위표기법(postfix notation)으로 표현된 하나의 수식을 파일(input.txt)로 입력받아 그 계 산결과를 화면에 출력하는 프로그램을 작성하라.
 
-- 질문 - 
-1.c:75:20: warning: enumeration values 'eos' and 'operand' not handled in switch [-Wswitch]
-            switch(token) {
-                   ^
-1.c:75:20: note: add missing switch cases
-            switch(token) {
-                   ^
-그리고 결과가 다음과 같이 뜹니다.
-=> zsh: floating point exception  ./main -> 어떤게 문제인지 모르겠습니다.
+*중요*
+=> zsh: floating point exception  ./main -> DEBUG를 통해 찾는 연습을 많이 해둬야 한다. (지속적으로)
+
 */
 
 #include <stdio.h>
@@ -45,8 +39,8 @@ int main(void)
     }
     fscanf(fp, "%s", expr);
     
-    printf("postfix expression : %s", expr);
-    printf("the evaluation value : %d", eval());
+    printf("postfix expression : %s\n", expr);
+    printf("the evaluation value : %d\n", eval());
 
     fclose(fp);
     return 0;
@@ -57,7 +51,7 @@ void push(int item)
         fprintf(stderr, "stack is full.\n");
         exit(EXIT_FAILURE);
     }
-    stack[top++] = item;
+    stack[++top] = item;
 }
 int pop()
 {
@@ -78,8 +72,10 @@ int eval(void)
     token = getToken(&symbol, &n);
     
     while(token != eos) {
-        if(token == operand)
+        if(token == operand) {
             push(symbol-'0');
+            //printf("Operand : stack[%d] == %d\n", top, stack[top]);
+        }
         else {
             op2 = pop();
             op1 = pop();
@@ -90,6 +86,7 @@ int eval(void)
                 case divide: push(op1 / op2); break;
                 case mod: push(op1 % op2);
             }
+            //printf("Cal : stack[%d] == %d\n", top, stack[top]);
         }
         token = getToken(&symbol, &n);
     }

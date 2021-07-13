@@ -2,12 +2,12 @@
 3. [ 환형큐(circular queue) ] 1번 문제의 프로그램을 환형큐 프로그램으로 수정하라.
     add, delete, qprint 명령어를 구현하시오.
 
-- Q -
-+ "zsh: segmentation fault  ./main" 에러가 뜨는데 
-addq() 에서 오류가 나는 것 같습니다.
-element *queue; <-- 전역변수를 * (포인터)를 이용하여 문제를 푸는건데, 어떻게 해결할지 모르겠습니다.
-addq, deleteq함수를 수정없이 사용하라 해서 더더욱 모르겠습니다.
+- 중요 -
+element *queue; => MALLOC (동적할당)을 하라~
+
 */
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,6 +16,12 @@ addq, deleteq함수를 수정없이 사용하라 해서 더더욱 모르겠습�
 #define MAX_QUEUE_SIZE 3
 #define MAX_NAME_SIZE 256
 #define MAX_BUF_SIZE 256
+
+#define MALLOC(p, s) \
+if(!(p = malloc(s))) { \
+fprintf(stderr, "Insufficient memory!\n"); \
+exit(EXIT_FAILURE); \
+}
 
 #define TRUE 1
 #define FALSE 0
@@ -28,12 +34,13 @@ typedef struct {
 
 //Global variable
 element *queue;
-int capacity = 2;
+
+// int capacity = 2; => #define MAX_QUEUE_SIZE 3 하므로 없어도 된다.
 int rear = 0;
 int front = 0;
 
 //Function
-void addq(element *item);
+void addq(element item);
 element deleteq();
 void qprint();
 void queueFULL();
@@ -45,6 +52,8 @@ int main(void)
     char buf[MAX_BUF_SIZE];
     char *ptr, *delimeter = " ";
 
+    //*
+    MALLOC(queue, sizeof(*queue) * MAX_QUEUE_SIZE); 
     puts("<< Circular queue operations where MAX_QUEUE_SIZE is 3\nadd 1 Jung\ndelete\n");
     puts("******************************************************************");
 
@@ -54,6 +63,7 @@ int main(void)
         ptr = strtok(buf, delimeter);
         
         if(!strcmp(ptr, "add")) {
+            //Parsing
             ptr = strtok(NULL, delimeter);
             sscanf(ptr, "%d", &(temp.id));
             ptr = strtok(NULL, delimeter);
@@ -70,12 +80,14 @@ int main(void)
     }
     return 0;
 }
-void addq(element item)
+void addq(element item) //*
 {
-    rear = (rear + 1) % MAX_QUEUE_SIZE;
-    if(front == rear) 
+    if(front == (rear + 1) % MAX_QUEUE_SIZE) 
         queueFULL();
-    queue[rear] = item;
+    else {
+        rear = (rear + 1) % MAX_QUEUE_SIZE;
+        queue[rear] = item;
+    }
 }
 element deleteq()
 {
@@ -84,19 +96,18 @@ element deleteq()
     front = (front + 1) % MAX_QUEUE_SIZE;
     return queue[front];
 }
-void qprint()
+void qprint()   //*
 {
     int i;
-    for(i = front + 1; i <= rear; i++) {
+    
+    for(i = (front + 1) % MAX_QUEUE_SIZE; i != (rear + 1) % MAX_QUEUE_SIZE; i = (i + 1) % MAX_QUEUE_SIZE) {
         printf("%d,\t%s\n", queue[i].id, queue[i].name);
-        printf("[DEBUG] : i = %d", i);
+        printf("[DEBUG] : i = %d\n", i);
     }
 }
 void queueFULL()
 {
-    if(front == 0 && rear == 0) {
-        puts("queue is full, not added");
-    }
+    puts("queue is full, not added");
 }
 element queueEmpty()
 {
@@ -107,3 +118,28 @@ element queueEmpty()
 
     return temp;
 }
+/*
+<< Circular queue operations where MAX_QUEUE_SIZE is 3
+add 1 Jung
+delete
+
+******************************************************************
+add 1 kim
+add 2 park
+qprint
+1,      kim
+2,      park
+
+add 3 lww
+queue is full, not added
+delete
+delete
+qprint
+add 6 korea
+sprint
+Wrong command! try again!
+qprint
+6,      korea
+delete
+delete
+queue is empty

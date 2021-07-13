@@ -4,9 +4,10 @@
 2. 다음 희소행렬(sparse matrix)에 대한 전치행렬(transpose matrix)을 구하는 함수로 
 Program 2.9 fastTranspose를 구현하여 실행결과를 보여라.
 
-- 질문 - 
+- 중요 - 
 + fast_transpose() 안에서 
-맨마지막 조건문에서  j = startingPos[a[i].col]++; << 이게 a와 b를 바꾸고 난뒤 j에 +1를 하는거죠 ?
+맨마지막 조건문에서  j = startingPos[a[i].col]++; << 이게 a와 b를 바꾸고 난뒤 
+j가 아니라 startingPos를  ++ 하는 것이다.
 */
 
 #include <stdio.h>
