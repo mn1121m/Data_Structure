@@ -26,7 +26,7 @@ typedef struct _treeNode {
 } treeNode;
 
 //Global variable
-treePointer root = NULL;
+treePointer root;
 
 //Function
 treePointer createNode(char data);
@@ -55,6 +55,7 @@ int main(void)
 
     printf("postorder traversal\t : ");
     postorder(root);
+    printf("\n");
     printf("\n");
     return 0;
 }
