@@ -67,7 +67,6 @@ int eval(void)
     char symbol;
     int op1, op2;
     int n = 0;      /* counter for the expression string */
-    top = -1;
     
     token = getToken(&symbol, &n);
     
@@ -106,3 +105,7 @@ precedence getToken(char *symbol, int *n)
         default : return operand;
     }
 }
+/* result
+postfix expression : 82/3-42*+
+the evaluation value : 9
+*/

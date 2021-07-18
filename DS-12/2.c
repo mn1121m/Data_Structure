@@ -62,7 +62,7 @@ int main(void)
         exit(EXIT_FAILURE);
     }
     printf("creating a complete binary tree\n");
-    root = createBinTree(fp);
+    root = createBinTree(&fp);
 
     fclose(fp);
 
