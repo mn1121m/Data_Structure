@@ -6,9 +6,6 @@
 element *queue; => MALLOC (동적할당)을 하라~
 
 */
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

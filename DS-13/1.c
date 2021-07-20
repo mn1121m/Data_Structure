@@ -1,151 +1,202 @@
-/* 진행중
+/* 0718 (일) 풀이
 자료구조응용
 13. Trees : 이진트리 생성 및 순회
+
 1. 후위표현식(postfix expression)을 입력받아 Figure 5.16과 같은 이진트리를 구성한 후, 이진트리 순회를 통해 중위표현식(infix expression), 전위표현식(prefix expression), 후 위표현식(postfix expression)을 출력하는 프로그램을 작성하라.
 
-- 질문 - 
-Undefined symbols for architecture x86_64:
-  "_createBinTree", referenced from:
-      _main in 1-82dce2.o
-ld: symbol(s) not found for architecture x86_64
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-eval(), createBinTree() <-- 구현생각과 그 과정에 대해서 설명부탁드리겠습니다.
-할 수록 뭔가 꼬이는것같고 잘모르겠습니다.
-*/
-
-#include<stdio.h>
-#include<stdlib.h>
+[참고]
++ typedef A B; A를 B라 부른다.
+*/ 
+#include <stdio.h>
+#include <stdlib.h>
 
 #define MALLOC(p, s) \
 if(!(p = malloc(s))) { \
-fprintf(stderr, "Insufficient memory.\n"); \
+fprint(stderr, "Insufficient memory.\n"); \
 exit(EXIT_FAILURE); \
 }
-#define MAX_STACK_SIZE 100
-#define MAX_EXPR_SIZE 81
-#define TRUE 1
-#define FASLE 0
+#include <stdio.h>
+#include <stdlib.h>
 
-//Data structure
-typedef struct _tNode* treePointer;
-typedef struct _tNode {
-    char data;  //문자열 출력을 위해 char 형으로 지정
+#define MALLOC(p, s) \
+if (!(p = malloc(s))) { \
+fprintf(stderr, "Insufficient memory\n"); \
+exit(EXIT_FAILURE); \
+}
+
+#define FALSE 0
+#define TRUE 1
+
+// Stack
+#define MAX_STACK_SIZE 128
+#define MAX_QUEUE_SIZE 128
+
+// Expression
+#define MAX_EXPR_SIZE 128
+
+//
+// Data Structure
+// Precedence
+typedef enum {eos = FALSE, plus, minus, times, divide, mod, operand} precedence;
+// Binary tree
+typedef struct node *treePointer;
+typedef struct node {
+    char data;
     treePointer leftChild, rightChild;
 } tNode;
-typedef enum {lparen, rparen, plus, minus, times, divide,
- mod, eos, operand } precedence;
 
-//Global variable
-treePointer root;
-treePointer stack[MAX_STACK_SIZE];
-int top = -1;
-char expr[MAX_EXPR_SIZE];  //postfix expression
-
-//Funtion 
-treePointer createNode(char data, treePointer left, treePointer right);
-treePointer createBinTree(char expr[]);
-treePointer eval(void);
-precedence getToken(char *symbol, int *n);
+//
+// Functions
+// Stack
 void push(treePointer item);
 treePointer pop();
 
-//Function - traversals
+// Queue
+void enqueue(treePointer item);
+treePointer dequeue();
+
+// Binary tree
+void createPostBinTree();
+treePointer createNode(char data, treePointer leftChild, treePointer rightChild);
+
+// Precedence
+precedence getToken(int *n, char *data);
+
+// Inorder, Preorder, Postorder
 void inorder(treePointer ptr);
 void preorder(treePointer ptr);
 void postorder(treePointer ptr);
 
-//Main
+//
+// Global variable
+treePointer root;
+treePointer stack[MAX_STACK_SIZE];
+int top = -1;
+char expr[MAX_EXPR_SIZE];
+
+treePointer queue[MAX_QUEUE_SIZE];
+int front = 0, rear = 0;
+
+
 int main(void)
 {
     FILE *fp;
 
-    if((fp = fopen("input.txt","r")) == NULL) {
-        fprintf(stderr, "no file name.\n");
+    printf("the length of input string should be less than %d\n", MAX_EXPR_SIZE);
+
+    // Get String stream
+    if (!(fp = fopen("input.txt", "r"))) {
+        fprintf(stderr, "Wrong file name!\n");
         exit(EXIT_FAILURE);
     }
     fscanf(fp, "%s", expr);
-    
-    puts("the length of input string should be less than 80");
-    printf("input string (postfix expression) : %s\n", expr);
-    printf("creating its binary tree\n\n");
-    
-    root = createBinTree(expr);
-
     fclose(fp);
-    return 0;
-}
-//Funtion
-treePointer createNode(char data, treePointer left, treePointer right)
-{
-    treePointer temp;
 
-    MALLOC(temp, sizeof(*temp));
-    temp->data = data;
-    temp->leftChild = left;
-    temp->rightChild = right;
+    printf("input string (postfix expression) : %s\n", expr);
 
-    return temp;
-} 
-treePointer createBinTree(char expr[]);
-treePointer eval(void)
-{
-    precedence token;
-    char symbol;
-    treePointer op1, op2;
-    int n = 0;      /* counter for the expression string */
-    
-    token = getToken(&symbol, &n);
-    
-    while(token != eos) {
-        if(token == operand) {
-            push(createNode(symbol, NULL, NULL));
-        }
-        else {
-            op2 = pop();
-            op1 = pop();
-            switch(token) { 
-                case plus: case minus: case times: case divide: case mod:
-                push(createNode(symbol, op1, op2)); break;
-            }
-        }
-        token = getToken(&symbol, &n);
-    }
-    return pop(); // return result 
-}
-precedence getToken(char *symbol, int *n)
-{
-    *symbol = expr[(*n)++];
+    printf("creating its binary tree\n\n");
+    createPostBinTree();
 
-    switch(*symbol) {
-        case '+': return plus;
-        case '-': return minus;
-        case '*': return times;
-        case '/': return divide;
-        case '%': return mod;
-        case '\0': return eos;
-        default : return operand;
-    }
+    printf("inorder traversals\t : ");
+    inorder(root);
+    putchar('\n');
+    printf("preorder traversals\t : ");
+    preorder(root);
+    putchar('\n');
+    printf("postorder traversals\t : ");
+    postorder(root);
+    putchar('\n');
+    putchar('\n');
+
+
 }
+//
+// Function
+// Stack
 void push(treePointer item)
 {
-    if(top == MAX_STACK_SIZE -1) {
-        fprintf(stderr, "stack is full.\n");
+    if (top == MAX_STACK_SIZE - 1) {
+        fprintf(stderr, "Stack full!\n");
         exit(EXIT_FAILURE);
     }
     stack[++top] = item;
 }
 treePointer pop()
 {
-    if(top == -1) {
-        fprintf(stderr, "stack is empty.\n");
-        exit(EXIT_FAILURE);
+    if (top == -1) {
+        fprintf(stderr, "Stack empty!\n");
+        return NULL;
     }
     return stack[top--];
 }
-//Function - traversals
+
+// Binary tree
+void createPostBinTree()
+{
+    int n = 0;
+    char data;
+    precedence token;
+    treePointer op1, op2;
+
+    while (token = getToken(&n, &data)) {
+        switch (token) {
+            case operand: 
+                push(createNode(data, NULL, NULL));
+                break;
+            case plus: case minus: case times: case divide: case mod:
+                op2 = pop();
+                op1 = pop();
+                push(createNode(data, op1, op2));   
+        }
+    }
+    root = pop();
+}
+treePointer createNode(char data, treePointer leftChild, treePointer rightChild)
+{
+    treePointer temp;
+
+    MALLOC(temp, sizeof(*temp));
+    temp->data = data;
+    temp->leftChild = leftChild;
+    temp->rightChild = rightChild;
+    return temp;
+}
+
+// Precedence
+precedence getToken(int *n, char *data)
+{
+    *data = expr[(*n)++];
+    switch (*data) {
+        case '+': return plus;
+        case '-': return minus;
+        case '*': return times;
+        case '/': return divide;
+        case '%': return mod;
+        case '\0': return eos;
+        default: return operand;
+    }
+}
+
+// Queue (Circular)
+void enqueue(treePointer item)
+{
+    if ((rear + 1) % MAX_QUEUE_SIZE == front) {
+        fprintf(stderr, "Queue full!\n");
+        exit(EXIT_FAILURE);
+    }
+    rear = (rear + 1) % MAX_QUEUE_SIZE;
+    queue[rear] = item;
+}
+treePointer dequeue()
+{
+    if (front == rear)
+        return NULL;
+    front = (front + 1) % MAX_QUEUE_SIZE;
+    return queue[front];
+}
 void inorder(treePointer ptr)
 {
-    if(ptr) {
+    if (ptr) {
         inorder(ptr->leftChild);
         printf("%c", ptr->data);
         inorder(ptr->rightChild);
@@ -153,7 +204,7 @@ void inorder(treePointer ptr)
 }
 void preorder(treePointer ptr)
 {
-    if(ptr) {
+    if (ptr) {
         printf("%c", ptr->data);
         preorder(ptr->leftChild);
         preorder(ptr->rightChild);
@@ -161,9 +212,19 @@ void preorder(treePointer ptr)
 }
 void postorder(treePointer ptr)
 {
-    if(ptr) {
+    if (ptr) {
         postorder(ptr->leftChild);
-        printf("%c", ptr->data);
         postorder(ptr->rightChild);
+        printf("%c", ptr->data);
     }
 }
+/* result
+the length of input string should be less than 128
+input string (postfix expression) : AB/C*D*E+
+creating its binary tree
+
+inorder traversals       : A/B*C*D+E
+preorder traversals      : +**/ABCDE
+postorder traversals     : AB/C*D*E+
+
+*/

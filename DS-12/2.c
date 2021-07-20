@@ -1,120 +1,97 @@
-/* 진행중
+/* 0718 (일) 풀이
 자료구조응용
 12. Trees : 이진트리 생성
 
 2. [큐를 이용한 완전이진트리 생성] 파일입력을 받아 다음과 같은 완전이진트리(complete binary tree)를 구성하여, 이진트리 순회방법 중 중위순회, 전위순회, 후위순회를 통해 출 력하는 프로그램을 작성하라.
-    - Q -
-treePointer createCompBinTree(FILE *fp);
-void insert(treePointer *pRoot, treePointer pNode);
-위의 함수식에 대한 풀이과정을 듣고싶습니다. 일단 구조는 짰는데, 세부적으로 구현과정에서 막막한 부분들이 있는데, 혹시 힌트만 먼저 주실수 있을까요 ?
-그리고 왜 *pRoot에서 이중포인트를 쓴 이유를 왜썼는지에 대해서 궁금합니다.
+[중요] 구현
++ treePointer createCompBinTree(FILE *fp);
++ void insert(treePointer *pRoot, treePointer newNode);
+[참고]
++ insert() => Transformer (Chapter 01(1) 참고)
 */
-
 #include <stdio.h>
 #include <stdlib.h>
 
 #define MALLOC(p, s) \
-if(!(p = malloc(s))) { \
-fprintf(stderr, "Insuficient memory\n"); \
+if (!(p = malloc(s))) { \
+fprintf(stderr, "Insufficient memory.\n"); \
 exit(EXIT_FAILURE); \
 }
-#define MAX_QUEUE_SIZE 100
+
+// Queue
+#define MAX_QUEUE_SIZE 128
+
+// BOOL
+typedef int BOOL;
 #define TRUE 1
 #define FALSE 0
 
-//Data structure
-typedef struct node* treePointer;
+//
+// Data structure
+// Binary tree
+typedef struct node *treePointer;
 typedef struct node {
     char data;
     treePointer leftChild, rightChild;
 } tNode;
 
-//Global variable 
-treePointer root;
-treePointer queue[MAX_QUEUE_SIZE];
-int front = -1;
-int rear = -1;
+// Queue
+// Linear queue
 
-//Function - queue
-void addq(treePointer item);
-treePointer deleteq();
-void queueFULL();
-treePointer deleteEmpty();
-
-//Function - complete binary tree
+//
+// Functions
+// Binary tree
 treePointer createNode(char data);
 treePointer createCompBinTree(FILE *fp);
-void insert(treePointer *pRoot, treePointer pNode);
-int hasBothChild(treePointer pNode);
 
-//Function - traversals
+void insert(treePointer *pRoot, treePointer newNode);
+BOOL hasBothChild(treePointer ptr); //* 의문형함수 -> boolean 많이 쓴다.
+treePointer insert2(treePointer root, treePointer newNode);
+
 void inorder(treePointer ptr);
 void preorder(treePointer ptr);
 void postorder(treePointer ptr);
 
-//Main
+// Queue
+void enqueue(treePointer item);
+treePointer dequeue();
+
+// Global variable
+treePointer root = NULL;
+treePointer queue[MAX_QUEUE_SIZE];
+int front = -1, rear = -1;
+
 int main(void)
 {
     FILE *fp;
 
-    if(fp = fopen("input.txt", "r") == NULL) {
-        fprintf(stderr, "no file name.\n");
+    printf("creating a complete binary tree\n\n");
+    if (!(fp = fopen("input.txt", "r"))) {
+        printf("Wrong file name!\n");
         exit(EXIT_FAILURE);
     }
-    printf("creating a complete binary tree\n");
-    root = createBinTree(&fp);
-
+    root = createCompBinTree(fp);
     fclose(fp);
 
     printf("three binary tree traversals\n");
     printf("inorder traversals\t : ");
     inorder(root);
-    printf("\n");
-
+    putchar('\n');
     printf("preorder traversals\t : ");
     preorder(root);
-    printf("\n");
-
+    putchar('\n');
     printf("postorder traversals\t : ");
     postorder(root);
-    printf("\n\n");
-    return 0;
-}
-//Function - queue
-void addq(treePointer item)
-{
-    if(rear == MAX_QUEUE_SIZE -1) {
-        queueFULL();
-    }
-    queue[++rear] = item;
-}
-treePointer deleteq()
-{
-    if(front = rear) {
-        return deleteEmpty();
-    }
-    return queue[++front];
-}
-void queueFULL()
-{
-    fprintf(stderr, "queue is full, can not add element.\n");
-    exit(EXIT_FAILURE);
-}
-treePointer deleteEmpty()
-{
-    treePointer message = {'\n', NULL, NULL};
+    putchar('\n');
+    putchar('\n');
 
-    fprintf(stderr, "queue is empty, can not delete element/\n");
-    exit(EXIT_FAILURE);
-
-    return message;
 }
-//Function - complete binary tree
+// Functions
 treePointer createNode(char data)
 {
     treePointer temp;
-    MALLOC(new, sizeof(*temp));
 
+    MALLOC(temp, sizeof(*temp));
     temp->data = data;
     temp->leftChild = NULL;
     temp->rightChild = NULL;
@@ -122,52 +99,92 @@ treePointer createNode(char data)
 }
 treePointer createCompBinTree(FILE *fp)
 {
-    treePointer new;
-    char ch;
-    
-    while(!feof(fp)) {
-        fscanf(fp, "%c", &ch);
-        insert(&new, createNode(ch));
+    char temp;
+
+    while (fscanf(fp, "%c", &temp) != EOF) {
+        root = insert2(root, createNode(temp));
     }
-    return new;
+    return root;
 }
-void insert(treePointer *pRoot, treePointer pNode)
+
+void insert(treePointer *pRoot, treePointer newNode)
 {
-    //1)if the tree is empty, initialize the root with new node.
-    if(pRoot == NULL) {
-        createNode(pRoot->data);
-    //2)else
+    treePointer frontNode;  //* queue에서 맨앞에 있는 노드구나.
+
+    if (!(*pRoot)) {
+        *pRoot = newNode;
     } else {
-        //1)leftChild is empty
-        if(pNode->leftChild == NULL) {
-            
-        }
-        //2)rightChild is empty
-        else if(pNode->rightChild == NULL) {
+        frontNode = queue[front + 1];
 
+        if (!(frontNode->leftChild)) {
+            frontNode->leftChild = newNode;
+        } else if (!(frontNode->rightChild)) {
+            frontNode->rightChild = newNode;
         }
-        //3)front node has both left, right.
-        if(hasBothChild(pNode)) {   // not null일 경우
-            deleteq();
-        }
+
+        if (hasBothChild(frontNode))
+            dequeue();
     }
-    //3)Enqueue() the new node.
-    addq(pNode);
+    enqueue(newNode);
 }
-int hasBothChild(treePointer pNode)
+//root 는 지역변수이기 때문에 return을 해줘야 하고 treePointer형으로 반환한다.
+treePointer insert2(treePointer root, treePointer newNode)
 {
-    int flag = FALSE;
+    treePointer frontNode;
 
-    if(pNode->leftChild != NULL && pNode->rightChild != NULL) {
-        both = TRUE;
+    if (!root) {
+        root = newNode;
+    } else {
+        frontNode = queue[front + 1];
+
+        if (!(frontNode->leftChild)) {
+            frontNode->leftChild = newNode;
+        } else if (!(frontNode->rightChild)) {
+            frontNode->rightChild = newNode;
+        }
+
+        if (hasBothChild(frontNode))
+            dequeue();
     }
+    enqueue(newNode);
 
-    return flag;
+    return root;
 }
-//Function - traversals
-void inorder(treePointer ptr)   //LVR
+
+BOOL hasBothChild(treePointer ptr)
 {
-    if(ptr) {
+    if (ptr->leftChild && ptr->rightChild)
+        return TRUE;
+    return FALSE;
+}
+
+
+// Queue
+void enqueue(treePointer item)
+{
+    // Queue Full
+    if (rear == MAX_QUEUE_SIZE - 1) {
+        fprintf(stderr, "Queue Full!\nTermination...\n");
+        exit(EXIT_FAILURE);
+    }
+    // Insert
+    queue[++rear] = item;
+}
+treePointer dequeue()
+{
+    // Queue empty
+    if (front == rear) {
+        fprintf(stderr, "Queue empty!\n");
+        return NULL;
+    }
+    // Dequeue
+    return queue[++front];
+
+}
+
+void inorder(treePointer ptr)
+{
+    if (ptr) {
         inorder(ptr->leftChild);
         printf("%c", ptr->data);
         inorder(ptr->rightChild);
@@ -175,7 +192,7 @@ void inorder(treePointer ptr)   //LVR
 }
 void preorder(treePointer ptr)
 {
-    if(ptr) {
+    if (ptr) {
         printf("%c", ptr->data);
         preorder(ptr->leftChild);
         preorder(ptr->rightChild);
@@ -183,9 +200,17 @@ void preorder(treePointer ptr)
 }
 void postorder(treePointer ptr)
 {
-    if(ptr) {
+    if (ptr) {
         postorder(ptr->leftChild);
-        printf("%c", ptr->data);
         postorder(ptr->rightChild);
+        printf("%c", ptr->data);
     }
 }
+/* result
+creating a complete binary tree
+
+three binary tree traversals
+inorder traversals       : HDIBEAFCG
+preorder traversals      : ABDHIECFG
+postorder traversals     : HIDEBFGCA
+*/
