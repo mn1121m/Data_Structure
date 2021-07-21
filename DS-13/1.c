@@ -7,14 +7,7 @@
 [참고]
 + typedef A B; A를 B라 부른다.
 */ 
-#include <stdio.h>
-#include <stdlib.h>
 
-#define MALLOC(p, s) \
-if(!(p = malloc(s))) { \
-fprint(stderr, "Insufficient memory.\n"); \
-exit(EXIT_FAILURE); \
-}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -29,7 +22,6 @@ exit(EXIT_FAILURE); \
 
 // Stack
 #define MAX_STACK_SIZE 128
-#define MAX_QUEUE_SIZE 128
 
 // Expression
 #define MAX_EXPR_SIZE 128
@@ -51,10 +43,6 @@ typedef struct node {
 void push(treePointer item);
 treePointer pop();
 
-// Queue
-void enqueue(treePointer item);
-treePointer dequeue();
-
 // Binary tree
 void createPostBinTree();
 treePointer createNode(char data, treePointer leftChild, treePointer rightChild);
@@ -73,10 +61,6 @@ treePointer root;
 treePointer stack[MAX_STACK_SIZE];
 int top = -1;
 char expr[MAX_EXPR_SIZE];
-
-treePointer queue[MAX_QUEUE_SIZE];
-int front = 0, rear = 0;
-
 
 int main(void)
 {
@@ -177,23 +161,6 @@ precedence getToken(int *n, char *data)
     }
 }
 
-// Queue (Circular)
-void enqueue(treePointer item)
-{
-    if ((rear + 1) % MAX_QUEUE_SIZE == front) {
-        fprintf(stderr, "Queue full!\n");
-        exit(EXIT_FAILURE);
-    }
-    rear = (rear + 1) % MAX_QUEUE_SIZE;
-    queue[rear] = item;
-}
-treePointer dequeue()
-{
-    if (front == rear)
-        return NULL;
-    front = (front + 1) % MAX_QUEUE_SIZE;
-    return queue[front];
-}
 void inorder(treePointer ptr)
 {
     if (ptr) {
@@ -218,13 +185,13 @@ void postorder(treePointer ptr)
         printf("%c", ptr->data);
     }
 }
-/* result
-the length of input string should be less than 128
-input string (postfix expression) : AB/C*D*E+
-creating its binary tree
+//result
+// the length of input string should be less than 128
+// input string (postfix expression) : AB-C-DE/*+
+// creating its binary tree
 
-inorder traversals       : A/B*C*D+E
-preorder traversals      : +**/ABCDE
-postorder traversals     : AB/C*D*E+
+// Stack empty!
+// inorder traversals       : +A-B-C*D/E
+// preorder traversals      : +*--ABC/DE
+// postorder traversals     : AB-C-DE/*+
 
-*/

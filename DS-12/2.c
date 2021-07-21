@@ -121,7 +121,6 @@ void insert(treePointer *pRoot, treePointer newNode)
         } else if (!(frontNode->rightChild)) {
             frontNode->rightChild = newNode;
         }
-
         if (hasBothChild(frontNode))
             dequeue();
     }
