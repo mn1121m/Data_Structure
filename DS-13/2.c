@@ -18,7 +18,7 @@ exit(EXIT_FAILURE); \
 #define FALSE 0
 #define TRUE 1
 
-// Stack
+// Stack, Queue
 #define MAX_STACK_SIZE 128
 #define MAX_QUEUE_SIZE 128
 
