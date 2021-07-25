@@ -1,7 +1,10 @@
-/* 진행중
+/* 질문
 3. 다음 입력파일의 데이터를 사용하여 최대히프(Max Heap)에 대한 실습을 수행한다. input.txt : 10 40 30 5 12 6 15 9 60
 
-push() -> insert into a max heap X ??
+
+- push() -> insertion into a max heap 출력에 대해서 
+왜 큰 순서대로 안나오는지 모르겠습니다.;;
+
 */
 
 #include <stdio.h>
@@ -13,7 +16,7 @@ fprintf(stderr, "Insufficient memory.\n"); \
 exit(EXIT_FAILURE); \
 }
 
-#define MAX_ELEMENTS 256    /* maximum heap size    */
+#define MAX_ELEMENTS 256    /*  maximum heap size   */
 #define HEAP_FULL(n) (n == MAX_ELEMENTS - 1)
 
 #define HEAP_EMPTY(n) (!n)

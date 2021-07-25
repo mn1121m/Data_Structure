@@ -52,7 +52,7 @@ void createPostBinTree();
 treePointer createNode(char data, treePointer leftChild, treePointer rightChild);
 
 // Precedence
-precedence getToken();
+precedence getToken(int *n, char *data);
 
 //  inorder, preorder, postorder
 void inorder(treePointer ptr);

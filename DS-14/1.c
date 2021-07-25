@@ -1,8 +1,9 @@
-/* 진행중 
+/* 질문
 자료구조응용
 14. Trees : 명제식 이진트리, heap
 1. postfix expression의 명제식을 파일로부터 입력받아 이진트리를 구성하여 중위순회 (inorder traversal)한 결과를 화면에 출력하라.
-createPostBinTree();
+
+- createPostBinTree();
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,13 +31,12 @@ typedef struct _node {
 //Global variable
 char expr[MAX_EXPR_SIZE];
 treePointer root;
-void inorder(treePointer ptr);
 
 //Funtions
 //Binary tree
 treePointer createNode(logical data, int value, treePointer leftChild, treePointer rightChild);
 void createPostBinTree();
-void inOrderEval(treePointer node);    //LRV
+void inOrderEval(treePointer node);
 
 int main(void)
 {
@@ -52,10 +52,10 @@ int main(void)
 
     fclose(fp);
     printf("creating its binary tree\n");
-    root = createBinTree();
+    //root = createPostBinTree();
 
     printf("inorder traversal\t : ");
-    inorder(root);
+    inOrderEval(root);
     printf("\n");
 
     return 0;
@@ -74,11 +74,11 @@ treePointer createNode(logical data, int value, treePointer leftChild, treePoint
 }
 void createPostBinTree();
 
-void inOrderEval(treePointer node)    //LVR
+void inOrderEval(treePointer node)
 {
     /* modefied postorder traversal to evaluate a propositional calculus tree */
     if(node) {
-        postOrderEval(node->leftChild);
+        inOrderEval(node->leftChild);
         switch(node->data) {
             case not: node->value = !node->rightChild->value; break;
             case and: node->value = node->rightChild->value && node->leftChild->value; break;
@@ -86,6 +86,6 @@ void inOrderEval(treePointer node)    //LVR
             case true: node->value = TRUE; break;
             case false: node->value = FALSE; break;
         }
-        postOrderEval(node->rightChild);
+        inOrderEval(node->rightChild);
     }
 }
