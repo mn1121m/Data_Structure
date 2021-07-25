@@ -1,9 +1,8 @@
 /* 질문
 3. 다음 입력파일의 데이터를 사용하여 최대히프(Max Heap)에 대한 실습을 수행한다. input.txt : 10 40 30 5 12 6 15 9 60
 
-
-- push() -> insertion into a max heap 출력에 대해서 
-왜 큰 순서대로 안나오는지 모르겠습니다.;;
+- 출력 : (4) 실행 예 <--> input.txt 데이터 값이 일단 다릅니다.
+- 출력에 관해서 어떻게 구현하는지 설명부탁드리겠습니다.
 
 */
 
@@ -38,7 +37,7 @@ int n = 0;  // 데이터 갯수
 //  Functions
 void push(element item, int *n);
 element pop(int *n);
-void hprint();
+void heap_print();
 
 //  Main
 int main(void)
@@ -56,7 +55,7 @@ int main(void)
     while(!feof(fp)) {
         fscanf(fp, "%d", &(temp.key));
         push(temp, &n);
-        hprint();   // print the insertion
+        heap_print();
     }
     fclose(fp);
     
@@ -65,7 +64,7 @@ int main(void)
     while(TRUE) {
         //if heap[] == NULL, break;
         pop(&n);
-        hprint();
+        heap_print();
     }
     printf("\n");
 }
@@ -80,7 +79,7 @@ void push(element item, int *n)
     }
     i = ++(*n);
     while((i != 1) && (item.key > heap[i/2].key)) {
-        heap[i] = heap[i/2];
+        heap[i] = heap[i/2];    // insert item into a leftChild;
         i /= 2;
     }
     heap[i] = item;
@@ -115,11 +114,10 @@ element pop(int *n)
     heap[parent] = temp;
     return item;
 }
-void hprint()
+void heap_print()
 {
     int i;
-
-    for(i = n; i > 0; i--) {
+    for(i = 0; i < n; i++) {
         printf("%d ", heap[i].key);
     }
     printf("\n");
