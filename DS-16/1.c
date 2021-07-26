@@ -4,6 +4,8 @@
 1. 다음과 같이 파일 입력을 통해 무방향 그래프(undirected graph)나 
  방향 그래프(directed graph)를 인접리스트(adjacency-list)로 구성하는 프로그램을 작성하시오.
 
+
+- (2) 실행순서 -> 2, 3번
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,32 +17,49 @@ exit(EXIT_FAILURE); \
 }
 
 #define MAX_VERTEX_SIZE 256
+#define TRUE 1
+#define FALSE 0
 
-// Data structure - graph_Node
+// Data structure
 typedef struct _node* graphPointer;
 typedef struct _node {
-    int data;           // vertex
-    graphPointer link;
-} graphNode;
+    int vertex;             // data
+    graphPointer link;      // link
+} node;
 
-typedef struct _graphType {
-    int n;
-    graphPointer adj_list[MAX_VERTEX_SIZE];
-} graphType;
+// Global variable
 
 // Functions
-create()
-insertVertex();
-insertEdge();
+graphPointer createNode(int vertex, graphPointer link);
+void insert(int from, int to);
 
+// Main
 int main(void)
 {
     FILE *fp;
+    char gchar;
+    int numVertex, numEdge;
+
     printf("<<<<<<<<<<<< Adjacency List >>>>>>>>>>>>>\n");
 
     if((fp = fopen("input.txt", "r")) == NULL) {
         fprintf(stderr, "Wrong file name.\n");
         exit(EXIT_FAILURE);
     }
+    // Read undirected graph OR directed graph, number of vertex, numver of edge
+    fscanf("%c %d %d", &gchar, &numVertex, &numEdge);
 
+    fclose(fp);
+    return 0;
 }
+// Functions
+graphPointer createNode(int vertex, graphPointer link)
+{
+    graphPointer temp;
+
+    MALLOC(temp, sizeof(*temp));
+    temp->vertex = vertex;
+    temp->link = link;
+    return temp;
+}
+void insert(int from, int to);
