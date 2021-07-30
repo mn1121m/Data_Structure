@@ -1,4 +1,4 @@
-/* 
+/*  다시()
 자료구조응용
 16. Adjacency List, Adjacency Multilists
 1. 다음과 같이 파일 입력을 통해 무방향 그래프(undirected graph)나 
@@ -6,7 +6,7 @@
 
 
 - 질문 -
-+   graphPointer *adjLists;      -> * 쓰는이유 : Muti Linkedlist
++   graphPointer *adjLists;      -> * 쓰는이유 : MutiLinkedlist (다중연결리스트이기 때문이다)
 +   int numOfVer, numOfEdges;
     char graphType;             ->  main()함수내에서가 아닌 전역변수로 바로 구현하는건 경험에서 나오는 건가요 ? 아니면 무슨 이유가 있나요 ?
 

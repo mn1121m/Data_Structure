@@ -1,8 +1,21 @@
-/*
+/* 다시()
 2. 다음과 같이 사용자로부터 정보를 입력받아서 무방향그래프(undirected graph)를
  Adjacency multilist로 구성하여
  각 정점에 부속되는 간선을 출력하는 프로그램을 작성하라.
 
+- 질문 - 
+1번 이해됨, 2번 이해안됨.
+
+1. addEdge() -> vertex1, vertex2 구현부분에 대해서 그림으로 다시한번만 설명좀 부탁드리겠습니다.
+    adMulList[ver1] = edge가 되었는데 
+    왜 p = adMulList[ver1]되는건지, 그리고  if (ver1 == p->vertex1) 으로 p에대한 그림을 못그리겠습니다.
+    그리고 while(1) { } 안에 부분에 대해서 그림으로도 설명부탁드리겠습니다.
+
+2. printMultilist() 에서 choice = 1 or choice = 0이 무엇을 뜻하는지, 
+    그리고 입력데이터 순서대로 / 헤더노드 정점이 먼저 오게 하는 것에 대한 구현을 이해를 못했습니다.;;
+
+
+[참고] A16 - 40분이후
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -87,7 +100,7 @@ void addEdge(int ver1, int ver2)
     tEdgePointer p;
 
     // Vertex 1
-    if (!adjMulList[ver1]) 
+    if (!adjMulList[ver1])
         adjMulList[ver1] = edge;
     else {
         p = adjMulList[ver1];
