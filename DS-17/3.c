@@ -1,8 +1,6 @@
 /*
 자료구조응용 17. Graph: DFS, BFS
-1. 다음과 같이 무방향그래프(undirected graph) 데이터를 입력받아 인접리스트를 만들고 dfs 결과를 출력하는 프로그램을 작성하라.
 
-13분이후 
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,23 +26,19 @@ typedef struct _node *graphPointer;
 // Functions
 void insertEdge(int u, int v);
 void printGraph(graphPointer *adjLists, int numOfVer);
-void bfs(int v);
+void dfs(int v);
 
-void enqueue(int item);
-int dequeue();
 
 // Global variable
 graphPointer *adjLists;
 int *visited;
 int numOfVer, numOfEdges;
 
-int queue[MAX_QUEUE_SIZE];
-int front = 0, rear = 0;
 
 int main(void)
 {
     FILE *fp;
-    int i, j, u, v;
+    int i, j, u, v, count = 0;
 
     if (!(fp = fopen("input.txt", "r"))) {
         fprintf(stderr, "Wrong file name!\n");
@@ -74,14 +68,13 @@ int main(void)
     printGraph(adjLists, numOfVer);
     putchar('\n');
 
-    printf("<<<<<<<<< Breadth First Search >>>>>>>>>>>\n");
-    for (i = 0; i < numOfVer ;i ++) {
-        printf("dfs(%d) : ", i);
-        bfs(i);
-        front = rear; // Queue init
-        for (j = 0 ; j < numOfVer ;j ++)
-            visited[j] = FALSE;
-        putchar('\n');
+    printf("<<<<<<<<< Connected component >>>>>>>>>>>\n");
+    for (i = 0; i < numOfVer; i ++) {
+        if (!visited[i]) {
+            printf("connected component %d : ", ++count);
+            dfs(i);
+            putchar('\n');
+        }
     }
 
 }
@@ -110,37 +103,14 @@ void printGraph(graphPointer *adjLists, int numOfVer)
     }
 
 }
-void bfs(int v)
+void dfs(int v)
 {
-    int u;
     graphPointer p;
 
     printf("%d ", v);
     visited[v] = TRUE;
-    enqueue(v);
-    while ((u = dequeue()) != -1) {
-        for (p = adjLists[u]; p ; p = p->link) {
-            if (!visited[p->data]) {
-                printf("%d ", p->data);
-                enqueue(p->data);
-                visited[p->data] = TRUE;
-            }
-        }
-    }
-}
-void enqueue(int item)
-{
-    if ((rear + 1)%MAX_QUEUE_SIZE == front) {
-        fprintf(stderr, "Queue full!\n");
-        exit(EXIT_FAILURE);
-    }
-    rear = (rear + 1)%MAX_QUEUE_SIZE;
-    queue[rear] = item;
-}
-int dequeue()
-{
-    if (front == rear) 
-        return -1;
-    front = (front + 1)%MAX_QUEUE_SIZE;
-    return queue[front];
+
+    for (p = adjLists[v] ;p ; p = p->link)
+        if (!visited[p->data])
+            dfs(p->data);
 }
