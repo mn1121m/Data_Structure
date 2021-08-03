@@ -40,7 +40,7 @@ int main(void)
     FILE *fp;
     int i, j, u, v, count = 0;
 
-    if (!(fp = fopen("input.txt", "r"))) {
+    if (!(fp = fopen("input3-2.txt", "r"))) {
         fprintf(stderr, "Wrong file name!\n");
         exit(EXIT_FAILURE);
     }
@@ -114,3 +114,18 @@ void dfs(int v)
         if (!visited[p->data])
             dfs(p->data);
 }
+/* result
+<<<<<<<<<<< Adjacency List >>>>>>>>>>>>>
+adjList[0] :    2  1  
+adjList[1] :    3  0  
+adjList[2] :    3  0  
+adjList[3] :    2  1  
+adjList[4] :    5  
+adjList[5] :    6  4  
+adjList[6] :    7  5  
+adjList[7] :    6  
+
+<<<<<<<<< Connected component >>>>>>>>>>>
+connected component 1 : 0 2 3 1 
+connected component 2 : 4 5 6 7
+*/

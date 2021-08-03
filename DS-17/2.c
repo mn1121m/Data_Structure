@@ -144,3 +144,25 @@ int dequeue()
     front = (front + 1)%MAX_QUEUE_SIZE;
     return queue[front];
 }
+
+/* result
+<<<<<<<<<<< Adjacency List >>>>>>>>>>>>>
+adjList[0] :    2  1  
+adjList[1] :    4  3  0  
+adjList[2] :    6  5  0  
+adjList[3] :    7  1  
+adjList[4] :    7  1  
+adjList[5] :    7  2  
+adjList[6] :    7  2  
+adjList[7] :    6  5  4  3  
+
+<<<<<<<<< Breadth First Search >>>>>>>>>>>
+dfs(0) : 0 2 1 6 5 4 3 7 
+dfs(1) : 1 4 3 0 7 2 6 5 
+dfs(2) : 2 6 5 0 7 1 4 3 
+dfs(3) : 3 7 1 6 5 4 0 2 
+dfs(4) : 4 7 1 6 5 3 0 2 
+dfs(5) : 5 7 2 6 4 3 0 1 
+dfs(6) : 6 7 2 5 4 3 0 1 
+dfs(7) : 7 6 5 4 3 2 1 0
+*/
