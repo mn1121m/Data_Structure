@@ -32,6 +32,7 @@ void dfs(int v);
 // Global variable
 graphPointer *adjLists;
 int *visited;
+
 int numOfVer, numOfEdges;
 
 int main(void)

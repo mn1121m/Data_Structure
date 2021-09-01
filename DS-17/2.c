@@ -1,6 +1,8 @@
 /*
 자료구조응용 17. Graph: DFS, BFS
-2. 위 1번 문제에 대해 dfs 대신 bfs의 결과를 출력하는 프로그램을 작성하라.
+1. 다음과 같이 무방향그래프(undirected graph) 데이터를 입력받아 인접리스트를 만들고 dfs 결과를 출력하는 프로그램을 작성하라.
+
+13분이후 
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,6 +25,14 @@ struct _node {
 };
 typedef struct _node *graphPointer;
 
+// Functions
+void insertEdge(int u, int v);
+void printGraph(graphPointer *adjLists, int numOfVer);
+void bfs(int v);
+
+void enqueue(int item);
+int dequeue();
+
 // Global variable
 graphPointer *adjLists;
 int *visited;
@@ -31,13 +41,6 @@ int numOfVer, numOfEdges;
 int queue[MAX_QUEUE_SIZE];
 int front = 0, rear = 0;
 
-// Functions
-void insertEdge(int u, int v);
-void printGraph(graphPointer *adjLists, int numOfVer);
-void bfs(int v);
-
-void enqueue(int item);
-int dequeue();
 int main(void)
 {
     FILE *fp;
@@ -72,8 +75,8 @@ int main(void)
     putchar('\n');
 
     printf("<<<<<<<<< Breadth First Search >>>>>>>>>>>\n");
-    for (i = 0; i < numOfVer; i ++) {
-        printf("bfs(%d) : ", i);
+    for (i = 0; i < numOfVer ;i ++) {
+        printf("dfs(%d) : ", i);
         bfs(i);
         front = rear; // Queue init
         for (j = 0 ; j < numOfVer ;j ++)
@@ -141,6 +144,7 @@ int dequeue()
     front = (front + 1)%MAX_QUEUE_SIZE;
     return queue[front];
 }
+
 /* result
 <<<<<<<<<<< Adjacency List >>>>>>>>>>>>>
 adjList[0] :    2  1  

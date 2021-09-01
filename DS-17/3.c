@@ -1,6 +1,5 @@
 /*
 자료구조응용 17. Graph: DFS, BFS
-3. 입력된 무방향그래프의 connected component를 출력하는 프로그램을 작성하라.
 
 */
 #include <stdio.h>
@@ -41,7 +40,7 @@ int main(void)
     FILE *fp;
     int i, j, u, v, count = 0;
 
-    if (!(fp = fopen("input3-1.txt", "r"))) {
+    if (!(fp = fopen("input3-2.txt", "r"))) {
         fprintf(stderr, "Wrong file name!\n");
         exit(EXIT_FAILURE);
     }
