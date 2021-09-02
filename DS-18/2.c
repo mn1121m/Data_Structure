@@ -1,3 +1,9 @@
+/*
+자료구조응용
+18. Graph: Kruskal Algorithm, prim Algorithm
+2. 다음과 같이 무방향그래프(undirected graph)에 대하여 prim Algorithm으로 최소비용 신장트리(MST)를 구축하는 과정에서,
+정점 선택으로 인해 변화되는 가중치 값을 출력 하 고 최소 비용을 구하시오.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 

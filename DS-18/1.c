@@ -1,3 +1,9 @@
+/*
+자료구조응용
+18. Graph: Kruskal Algorithm, prim Algorithm
+1. 다음과 같이 무방향그래프(undirected graph)에 대하여 Kruskal's Algorithm으로 최소비 용 신장트리(MST)를 구축해 나가는 과정을 출력 하시오. 
+탐색되는 edge를 순서대로 출력하 고, 최소 비용을 구하시오.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
