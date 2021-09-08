@@ -1,4 +1,4 @@
-//0907 remind
+//2021_0907 remind
 // 1 (1) 1차원 배열과 배열포인터
 #include <stdio.h>
 
