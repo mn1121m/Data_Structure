@@ -4,7 +4,8 @@
 void f1()
 {
 	int x1 = 0;
-    int x2;
+    int x2 = 0;
+    
 	printf("%d %d\n", x1++, x2++);
 }
 

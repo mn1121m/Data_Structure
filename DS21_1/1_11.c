@@ -1,74 +1,75 @@
-/* 문제 11  다시()
+/* 문제 11  다시(ok)(ok)
 수를 입력 받고 이를 반드시 selection sort를 수행 후 출력하고 그 뒤 입력되는 수(searchNum)의 인덱스를 출력(반드시 binarySearch를 사용)하시오.
 (기본적으로 모든 수의 출력은 %2d를 사용하시오.)
-*/
 
+[Cf] 
+- 출력할때 "%2d" 로 출력할 것.
+- getchar('\n') or printf("\n") 으로 개행문자 확인
+*/
 #include <stdio.h>
 
-//Function
+// Function
+void selection_sort();
 void print_ary(int *ary, int size);
-void selection_sort(int *ary, int size);
-int binSearch(int *ary, int size, int value);
+int binsearch(int *ary, int size, int value);
 
-//Main
+// Main
 int main(void)
 {
-    int size, i;   // 입력되는 수의 갯수 : size
-    int num;    // 입력되는 수 : num
-    int search_num;
+    int num_size;  //입력되는 수의 갯수
+    int i, num, search_num;
 
-    scanf("%d", &size);
-    int ary[size];
+    scanf("%d", &num_size); //5
+    int ary[num_size];
 
-    for(i = 0; i < size; i++) {
-        scanf("%d", &num);
-        ary[i] = num;
+    for(i = 0; i < num_size; i++) {
+        scanf("%d", &ary[i]);
     }
-    putchar('\n');
-    
-    selection_sort(ary, size);
-    print_ary(ary, size);
-    putchar('\n');
+    selection_sort(ary, num_size);
+    print_ary(ary, num_size);
 
-    scanf("%d", &search_num); // searchNum 입력
-    printf("%d\n", binSearch(ary, size, search_num));
-
+    //searchNum 입력
+    scanf("%d", &search_num);
+    printf("%2d\n", binsearch(ary, num_size, search_num));
     return 0;
 }
-
-//Function
+// Function
 void selection_sort(int *ary, int size)
 {
-    int i, j, min, temp;
+    int i, temp, min, j;
 
-    for(i = 0; i < size; i ++) {
+    for(i = 0; i < size; i++) {
         min = i;
-        for(j = i+1 ; j < size; j ++) {
+        for(j = i+1; j < size; j++) {
             if(ary[j] < ary[min])
                 min = j;
         }
-        temp = ary[i];
-        ary[i] = ary[min];
-        ary[min] = temp;
+        temp = ary[min];
+        ary[min] = ary[i];
+        ary[i] = temp;
     }
 }
 void print_ary(int *ary, int size)
 {
     int i;
-    for(i = 0; i < size; i ++) {
+
+    for(i = 0; i < size; i++) {
         printf("%2d", ary[i]);
     }
+    putchar('\n');
 }
-
-int binSearch(int *ary, int size, int value)
+int binsearch(int *ary, int size, int value)
 {
-    int middle, left = 0, right = size - 1;
-    
+    int left = 0, right = size - 1;
+    int middle;
+
     while(left <= right) {
         middle = (left + right) / 2;
-        if(ary[middle] > value) right = middle - 1;
-        else if(ary[middle] == value) return middle;
-        else left = middle + 1;
+        if(ary[middle] < value)
+            left = middle +1;
+        else if (ary[middle] == value) return middle;
+        else
+            right = middle -1;
     }
     return -1;
 }
