@@ -1,7 +1,4 @@
-/*
-remind 다시()
-*/
-
+//remind 3-1 다시(ok) 
 #include <stdio.h>
 
 int sumAry3D_f1(int ary[][2][3], int SEC, int ROW, int COL); // 배열파라미터 //권장 
