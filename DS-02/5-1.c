@@ -10,7 +10,6 @@
 
 다시(ok)
 *cf) COMPARE 쓰는 이유: strcmp같은 함수도 이용할때 쓸 수있기 때문.
-
 */
 #include <stdio.h>
 
