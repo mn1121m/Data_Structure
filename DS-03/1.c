@@ -1,4 +1,4 @@
-/*
+/* remind(ok)
 자료구조응용
 03. 성능측정(Performance Measurement)
 
