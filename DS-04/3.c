@@ -1,10 +1,13 @@
-/* remind()()
+/* remind(ok)()
 
 3, 이차원 배열의 합을 구하는 프로그램이다. [2차원 배열을 함수로 전달] 정적배열, 동적배 열을 함수로 전달하는 방법을 비교하는 프로그램이다. 
 함수의 파라미터 타입에 주의하면서 프 로그램을 작성하라. 
 디버깅 창을 출력하고, 동적배열을 sumAry2D_f1의 인자로 전달할 수 없는 이유를 쓰시오.
 
 [중요]
+
++ MALLOC - 2차원 배열 선언
+
 + 동적배열을 sumAry2D_f1의 인자로 전달할 수 없는 이유를 쓰시오 
     동적배열 -> 정적배열 : 크기가 다르기 때문이다. 
     int ** 의 크기는 (sizeof) = 4, int [*][3]의 크기는 4 * 3 = 12이므로 4 -> 12로 전달할 수 없습니다.
@@ -12,8 +15,6 @@
 + 정적배열을 동적배열로 전달할 수 없는 이유 ( =  //정적배열을 f4, f5(동적배열)로 전달할 수 있을까? 테스트해 보라! -> 전달 x)
     정적배열인 int [2][3] 의 크기는 4 * 2 * 3 = 24, int ** 의 크기는 4입니다.
     **중요** 각각의 type형이 다르기 때문이다. 
-
-
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -58,10 +59,10 @@ int main(void)
     printf("sumAry2D_f5(): %d\n", sumAry2D_f5(&ary, 2, 3));
 
     //동적배열을 f1, f2, f3(정적배열)로 전달할 수 있을까? 테스트해 보라! -> 전달 x
-    printf("sumAry2D_f1~f3() %d\n", sumAry2D_f1(ary, 2, 3));
+    //printf("sumAry2D_f1~f3() %d\n", sumAry2D_f1(ary, 2, 3));
     
     //정적배열을 f4, f5(동적배열)로 전달할 수 있을까? 테스트해 보라! -> 전달 x
-    printf("sumAry2D_f4~f5() %d\n", sumAry2D_f4(ary2D, 2, 3));
+    //printf("sumAry2D_f4~f5() %d\n", sumAry2D_f4(ary2D, 2, 3));
 
     freeAry2D(ary, 2);
     return 0;
@@ -112,7 +113,7 @@ int sumAry2D_f5( int ***ary, int rows, int cols )
 
     for(i = 0; i < rows; i++) {
         for(j = 0; j < cols; j++) 
-            sum += (*ary)[i][j]; //중요 - 우선순위 : * < [], (*)[] 처럼 포인터를 괄호에 넣어줘야한다.
+            sum += (*ary)[i][j]; // [중요] : 우선순위 : * < [], (*)[] 처럼 포인터를 괄호에 넣어줘야한다.
     }
     return sum;
 }
@@ -124,3 +125,10 @@ void freeAry2D(int **ary, int rows)
         free(ary[i]);
     free(ary);
 }
+/* result
+sumAry2D_f1(): 21
+sumAry2D_f2(): 21
+sumAry2D_f3(): 21
+sumAry2D_f4(): 9
+sumAry2D_f5(): 9
+*/

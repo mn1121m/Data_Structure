@@ -1,4 +1,4 @@
-/* remind(ok)()
+/* remind(ok)(ok)
 
 자료구조응용
 04. 배열, 구조체, 다항식더하기
@@ -8,7 +8,7 @@
 주소값을 반환한다. (즉 함수 호출로 1차원 배열 만들기)
 
 [복습]
-    - rand() 매번 다르게 나오게 하는 알고리즘
+    - rand() 매번 다르게 나오게 하는 알고리즘   =>  srand((unsigned int)time(NULL));
     - int* make1dArray() 구현
 */
 
@@ -45,7 +45,7 @@ int *make1dArray(int num)
     int *temp, i;
 
     srand((unsigned int)time(NULL));
-    MALLOC(temp, sizeof(*temp)* num);
+    MALLOC(temp, sizeof(*temp) * num);
 
     for( i = 0; i < num; i++) {
         temp[i] = rand() % 100;
