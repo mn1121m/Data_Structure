@@ -1,4 +1,4 @@
-/* remind()()
+/* remind(ok)()
 
 6. 다항식을 다음 같이 표현 하는 방식을 이용하여, 두 다항식을 입력받아 더한 후 
 그 결과를 출력하는 프로그램을 작성하라.
@@ -60,7 +60,7 @@ int main(void)
     for(i = startB; i <= finishB; i++) {
         scanf("%f %d,", &terms[i].coef, &terms[i].expon);    //%d뒤에 , 써주면 ',' 구분된다.
     }
-    avail = finishB + 1;
+    avail = finishB + 1; // *중요*
     //  padd
     padd(startA, finishA, startB, finishB, &startD, &finishD);
 
