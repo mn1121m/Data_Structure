@@ -1,5 +1,5 @@
-/* remind(ok)()
-
+/* remind(ok)(ok)
+2018117610_문준용
 6. 다항식을 다음 같이 표현 하는 방식을 이용하여, 두 다항식을 입력받아 더한 후 
 그 결과를 출력하는 프로그램을 작성하라.
 
@@ -14,8 +14,9 @@
 -> scanf("%f %d,", ~~~) 처럼 %d 뒤에 ,를 붙여주면 된다.
 
 [복습] - check 
-+ print_add() 구현하는 과정
-+ padd, attach 보기 없이 구현할 것.
++  startA,B , finishA,B 선언, startD, finishD, avail 순서
++ print_add() 구현하는 과정 => ok
++ padd, attach 보기 없이 구현할 것. => ok
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -77,6 +78,7 @@ void padd(int startA, int finishA, int startB, int finishB, int *startD, int *fi
     /*  add A(x) and B(x) to obtan D(x) */
     float coefficient;
     *startD = avail;
+    
     while(startA <= finishA && startB <= finishB) {
         switch(COMPARE(terms[startA].expon, terms[startB].expon)) {
             case -1: /* a expon < b expon */
