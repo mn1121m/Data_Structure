@@ -50,7 +50,7 @@ int main(void)
     int i, j;
 
     // input row, col
-    printf("input row col (ex 4 5): ");
+    //printf("input row col (ex 4 5): ");
     scanf("%d %d", &left, &right);
 
     // for i = 0:row , j = 0:col
