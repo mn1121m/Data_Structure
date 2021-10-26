@@ -12,8 +12,8 @@
 
 #define MAX_STACK_SIZE 128
 #define MAX_EXPR_SIZE 80
-#define TRUE 1
-#define FALSE 0
+// #define TRUE 1
+// #define FALSE 0
 
 //Data structure
 typedef enum {plus, minus, times

@@ -1,16 +1,9 @@
-/*
-2. 중위표기법(infix notation)으로 표현된 하나의 수식을 파일로 입력받아 후위표기법(postfix notation)으로 변환하여 화면 및 파일에 동시에 출력하는 프로그램을 작성하라.
-    [프로그램 설명]
-    입력파일(“input.txt”) : (4/(2-2+3))*(3-4)*2
-    화면출력 & 파일출력(“output.txt”) : 422-3+/34-*2* ※ 입력수식의 문자열 길이는 최대 80으로 함
-    사용되는 연산자 : +, -, *, /, %, (, )
-    사용되는 피연산자 : 알파벳 소문자, 1~9 사이의 한 자리 정수
-    ※ 피연산자가 모두 1~9의 한 자리 정수면, 출력결과를 2번 문제의 입력으로 사용 가능
-    posfix(), printToken() 함수의 화면출력 부분에 파일출력 추가 void printToken(precedence); 직접 구현
+/* remind
+file: 2.c
 
-[중요]
-    - postfix() 이해와 구현 /  마지막 while() - 남은 token도 출력
-    - printToken() 구현
+[*]
+    - postfix() 전반적인 이해 및 마지막 while() - 남은 token도 출력
+    - printToken() 함수
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,8 +46,8 @@ int main(void)
     printf("<<<<<<<<infix to postfix >>>>>>>>>\n");
     printf("infix expression\t: %s\n", expr);
 
-    // postfix
-    printf("postfix expression\t: ");
+    // infix -> postfix
+    printf("postfix expression\t: ");    
     postfix();
     putchar('\n');
 
@@ -88,8 +81,8 @@ void postfix()
         }
     }
     /* 남은 token도 출력 */
-    while( (token = pop()) != eos)
-        print_token(token);
+    while(  (token = pop()) != eos)
+        printToken(token);
     printf("\n");
 }
 precedence getToken(char *symbol, int *n)
@@ -134,4 +127,3 @@ precedence pop()
     }
     return stack[top--];
 }
-
