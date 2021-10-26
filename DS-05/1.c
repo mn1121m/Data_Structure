@@ -1,4 +1,4 @@
-/* remind(ok)()
+/*
 05. 다항식더하기, 전치행렬구하기
 
 1. 크기가 20*20인 이차원 배열로 희소 행렬을 다음과 같이 만들어라. 
@@ -43,7 +43,7 @@ int main(void)
 {
     int n;
 
-    printf("Press the numver of a elements : ");
+    printf("Press the number of a elements : ");
     scanf("%d", &n);
 
     createAry(n);
@@ -51,7 +51,7 @@ int main(void)
     printAry(ary);
 
     ary2SparseMat();
-    printf("sparse matrix\n");
+    printf("Sparse Matrix\n");
     printSparseMat();
     return 0;
 }
@@ -66,11 +66,11 @@ void createAry(int n)
         //중복처리
         row = rand() % ROW;
         col = rand() % COL;
-        while(flag[row][col]) {    //값이 있으면(TRUE) 다시 뽑으라는 의미이다. flag = FALSE일때 반복문을 빠져나온다.
+        while(flag[row][col]) {     //값이 있으면(TRUE) 다시 뽑으라는 의미이다. flag = FALSE 일때 반복문을 빠져나온다.
             row = rand() % ROW;
             col = rand() % COL;
         }
-        flag[row][col] = TRUE;
+        flag[row][col] = TRUE;                  /* flag 초기화 */
         ary[row][col] = rand() % 100 + 1;     //value = rand() % 100 + 1 : 1 ~ 100
     }
 }
