@@ -1,5 +1,6 @@
 /*
-2. [ 정적할당배열을 이용한 선형큐(linear queue) ] 다음과 같은 선형 큐를 생성하고 실행 예와 같이 수행되는 프로그램을 작성하라. 
+2. [ 정적할당배열을 이용한 선형큐(linear queue) ] 
+다음과 같은 선형 큐를 생성하고 실행 예와 같이 수행되는 프로그램을 작성하라. 
 이를 위해, addq, deleteq, queueFull, queueEmpty qprint(queue의 내용을 출력) 함수를 구현하여야 한다.
 
 *중요*
@@ -10,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_QUEUE_SIZE 3
+#define MAX_QUEUE_SIZE 5
 #define MAX_NAME_SIZE 256
 #define MAX_BUF_SIZE 256
 
@@ -88,7 +89,7 @@ void queueFULL()
         exit(EXIT_FAILURE);
     } else { // *중요* 그 이외에 대해서는 큐의 항목들을 이동 
         puts("array shifting...");
-        //전체적으로 앞으로 한칸씩 이동
+        // **전체적으로** 앞으로 한칸씩 이동
         for(i = front +1; i <= rear; i++) { 
             queue[i - front - 1] = queue[i];
         }

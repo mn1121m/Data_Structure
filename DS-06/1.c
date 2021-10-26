@@ -14,7 +14,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX_STACK_SIZE 5
+#define MAX_STACK_SIZE 8
 #define MAX_NAME_SIZE 256
 #define MAX_BUF_SIZE 256
 
@@ -41,7 +41,7 @@ void sprint();
 int main(void)
 {
     //gets_s, strtok_s, strcpm, sscanf_s, strlen
-    int i = 0;
+    //int i = 0;    => [DEBUG]
     char buf[MAX_BUF_SIZE];
     char *ptr, *delimeter = " ";
     element temp;

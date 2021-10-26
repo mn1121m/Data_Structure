@@ -77,7 +77,7 @@ int main(void)
     }
     return 0;
 }
-void addq(element item) //*
+void addq(element item) //* if문
 {
     if(front == (rear + 1) % MAX_QUEUE_SIZE) 
         queueFULL();
@@ -98,7 +98,7 @@ void qprint()   //*
     int i;
     
     for(i = (front + 1) % MAX_QUEUE_SIZE; i != (rear + 1) % MAX_QUEUE_SIZE; i = (i + 1) % MAX_QUEUE_SIZE) {
-        printf("%d,\t%s\n", queue[i].id, queue[i].name);
+        printf("%d, %s\n", queue[i].id, queue[i].name);
         printf("[DEBUG] : i = %d\n", i);
     }
 }
@@ -140,3 +140,4 @@ qprint
 delete
 delete
 queue is empty
+*/
