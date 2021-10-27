@@ -87,9 +87,9 @@ void postfix()
             push(token);
         }
     }
-    /* 남은 token도 출력 */
+    /* 남은 token(operator)도 출력 */
     while( (token = pop()) != eos)
-        print_token(token);
+        printToken(token);
     printf("\n");
 }
 precedence getToken(char *symbol, int *n)

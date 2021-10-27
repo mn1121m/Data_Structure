@@ -51,7 +51,7 @@ int eval(void)
     char symbol;
     int op1, op2;
     int n = 0;
-    top = -1;
+    //top = -1; -> global variable
     token = getToken(&symbol, &n);
 
     while(token != eos) {

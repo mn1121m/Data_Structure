@@ -1,4 +1,4 @@
-/* remind(ok)
+/* remind
 
 3. 다음 Program 1.25를 사용하여 선택정렬(Selection Sort)에 대한 성능측정을 하라. 
 그리고 프로그램의 실행결과를 이용하여 그래프를 작성하라. 

@@ -1,4 +1,4 @@
-/* remaind 
+/* remind 
 file : 1.c
 
 [*]

@@ -1,4 +1,4 @@
-/* remind(ok)(ok)
+/* remind
 
 4. [구조체] 다음 코드를 이용하여, 실행 예와 같은 결과를 나타내는 프로그램을 작성하라. 단 humansEqual 함수를 다음과 같이 수정하여 사용해야 한다. (1점)
 수정된 함수원형 : int humansEqual(humanBing *person1, humanBeing *person2);

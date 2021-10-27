@@ -1,5 +1,5 @@
 /* remind 
-file 2.c
+file : 2.c
 
 [*]
     - queuefull() 전체적으로 + if, else 문
