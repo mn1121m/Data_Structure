@@ -34,7 +34,7 @@ void freeList(listPointer first);
 // Global Variable
 listPointer first = NULL;
 
-//main
+// Main
 int main(void)
 {
     // first = createNode(10, createNode(20, createNode(30, NULL)));
@@ -152,7 +152,7 @@ int deleteItem(listPointer *first, int data)
         return 0;
     }
     while(TRUE) {
-        //Middle, Right
+        // Middle, Right
         if(q->data == data) {
             p->link = q->link;
             free(q);
