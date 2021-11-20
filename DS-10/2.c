@@ -154,7 +154,7 @@ void printPoly(polyPointer ptr)
     if (ptr) {
         ptr = ptr->link;
         while (ptr != lastNode) {
-            //printf("(%d, %d) ", ptr->coef, ptr->expon);
+            printf("(%d, %d) ", ptr->coef, ptr->expon);
             ptr = ptr->link;
         }
     }
