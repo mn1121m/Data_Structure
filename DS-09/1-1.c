@@ -1,4 +1,4 @@
-/* remind */
+/* 1.c remind */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,4 +44,3 @@ listPointer createNode(int data, listPointer link)
 }
 
 // Insert
-void insertNode();
