@@ -1,10 +1,12 @@
-/* 0718 (일) 풀이
-자료구조응용
-12. Trees : 이진트리 생성
+/* 
+Data structure 
+12. Trees : create Binary tree
 
-2. [큐를 이용한 완전이진트리 생성] 파일입력을 받아 다음과 같은 완전이진트리(complete binary tree)를 구성하여, 이진트리 순회방법 중 중위순회, 전위순회, 후위순회를 통해 출 력하는 프로그램을 작성하라.
-[중요] 구현
-+ treePointer createCompBinTree(FILE *fp);
+2. [큐를 이용한 완전이진트리 생성] 파일입력을 받아 다음과 같은 완전이진트리(complete binary tree)를 구성하여,
+이진트리 순회방법 중 중위순회, 전위순회, 후위순회를 통해 출 력하는 프로그램을 작성하라.
+
+[구현] - 중요
++ treePointer createCompBinTree(FILE *fp); -> ()
 + void insert(treePointer *pRoot, treePointer newNode);
 [참고]
 + insert() => Transformer (Chapter 01(1) 참고)
@@ -106,7 +108,7 @@ treePointer createCompBinTree(FILE *fp)
     }
     return root;
 }
-
+/*중요*/
 void insert(treePointer *pRoot, treePointer newNode)
 {
     treePointer frontNode;  //* queue에서 맨앞에 있는 노드구나.
@@ -166,7 +168,7 @@ void enqueue(treePointer item)
         fprintf(stderr, "Queue Full!\nTermination...\n");
         exit(EXIT_FAILURE);
     }
-    // Insert
+    // Enqueue
     queue[++rear] = item;
 }
 treePointer dequeue()
@@ -181,6 +183,7 @@ treePointer dequeue()
 
 }
 
+//LVR
 void inorder(treePointer ptr)
 {
     if (ptr) {
@@ -189,6 +192,7 @@ void inorder(treePointer ptr)
         inorder(ptr->rightChild);
     }
 }
+//VLR
 void preorder(treePointer ptr)
 {
     if (ptr) {
@@ -197,6 +201,7 @@ void preorder(treePointer ptr)
         preorder(ptr->rightChild);
     }
 }
+//LRV
 void postorder(treePointer ptr)
 {
     if (ptr) {
