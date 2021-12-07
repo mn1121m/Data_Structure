@@ -3,5 +3,5 @@
 - 자료구조 문제에 대한 풀이를 코드로 정리하였습니다.
 
 ## Text book
-- Title: Fundamentals of data structures in C, 2nd edition.]
+- Title: Fundamentals of data structures in C, 2nd edition.
 - Authors: Horowitz, Sahni, Anderson-Freed.
