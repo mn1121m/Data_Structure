@@ -28,7 +28,7 @@ listPointer createNode(int data, listPointer link);
 // Main
 int main(void)
 {
-
+    
     return 0;
 }
 
