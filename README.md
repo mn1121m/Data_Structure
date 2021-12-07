@@ -5,3 +5,5 @@
 ## Text book
 - Title: Fundamentals of data structures in C, 2nd edition.
 - Authors: Horowitz, Sahni, Anderson-Freed.
+
+![자료구조_입체](http://image.kyobobook.co.kr/images/book/large/407/l9780929306407.jpg)
