@@ -1,5 +1,5 @@
 /*  review 2.c   */
-// 2:45:00~
+// 2:45:00 ~ 3:00
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -49,9 +49,14 @@ treePointer pop();
 void enqueue(treePointer item);
 treePointer dequeue();
 
+// Binary tree =>*중요*
+void levelOrder(treePointer root);
+
 // Binary tree => *중요*
 treePointer createNode(char data, treePointer leftChild, treePointer rightChild);
 void createPostBinTree();
+
+// Precedence
 precedence getToken();
 
 // In, Pre, Post order
@@ -75,16 +80,8 @@ int main(void)
     printf("creating its binary tree\n\n");
     createPostBinTree();
 
-    printf("inorder traversals\t : ");
-    inorder(root);
-    putchar('\n');
-    printf("preorder traversals\t : ");
-    preorder(root);
-    putchar('\n');
-    printf("postorder traversals\t : ");
-    postorder(root);
-    putchar('\n');
-    putchar('\n');
+    printf("level order traversal\t : ");
+    levelOrder(root);
 
     return 0;
 }
@@ -123,7 +120,24 @@ treePointer dequeue()
     front = (front+1) % MAX_QUEUE_SIZE;
     return queue[front];
 }
+// Binary tree
+void levelOrder(treePointer root)
+{
+    treePointer node;
+    front = rear = 0;
+    if(!root) return;   // empty tree
 
+    enqueue(root);
+    while(TRUE) {
+        node = dequeue();
+        if(node) {
+            printf("%c", node->data);
+            if(node->leftChild) enqueue(node->leftChild);
+            if(node->rightChild) enqueue(node->rightChild);
+        }
+        else break;
+    }
+}
 treePointer createNode(char data, treePointer leftChild, treePointer rightChild)
 {
     treePointer temp;
