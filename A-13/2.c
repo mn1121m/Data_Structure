@@ -5,6 +5,8 @@
 2. 후위표현식(postfix expression)을 입력받아 Figure 5.16과 같은 이진트리를 구성한 후, 반복문을 사용한 중위순회 및 level-order 순회를 하는 프로그램을 작성하라.
 [참고]
 + levelOrder() -> node: 현재노드
+[중요]
+levelOrder, iterInorder -> 다시()
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -88,7 +90,6 @@ int main(void)
     printf("level order traversal\t : ");
     levelOrder(root);
 
-
 }
 //
 // Function
@@ -111,10 +112,10 @@ treePointer pop()
 }
 
 // Binary tree
-void levelOrder(treePointer root)
+void levelOrder(treePointer root)   // root => 뿌리
 {
     front = rear = 0;
-    treePointer node;
+    treePointer node;   // 현재노드
 
     // empty tree
     if (!root) return;
@@ -122,7 +123,7 @@ void levelOrder(treePointer root)
     enqueue(root);
     while (TRUE) {
         node = dequeue();
-        if (!node) return;
+        if (!node) return;  // 현재노드가 NULL값을 가질 경우
         printf("%c", node->data);
         if (node->leftChild) enqueue(node->leftChild);
         if (node->rightChild) enqueue(node->rightChild);
@@ -198,4 +199,5 @@ input string (postfix expression) : AB/C*D*E+
 creating its binary tree
 
 level order traversal    : +*E*D/CAB%   
+
 */

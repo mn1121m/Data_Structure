@@ -1,11 +1,9 @@
-/* 0718 (일) 풀이
+/* 0718 풀이
 자료구조응용
 13. Trees : 이진트리 생성 및 순회
 
-1. 후위표현식(postfix expression)을 입력받아 Figure 5.16과 같은 이진트리를 구성한 후, 이진트리 순회를 통해 중위표현식(infix expression), 전위표현식(prefix expression), 후 위표현식(postfix expression)을 출력하는 프로그램을 작성하라.
-
-[참고]
-+ typedef A B; A를 B라 부른다.
+1. 후위표현식(postfix expression)을 입력받아 Figure 5.16과 같은 이진트리를 구성한 후, 
+이진트리 순회를 통해 중위표현식(infix expression), 전위표현식(prefix expression), 후 위표현식(postfix expression)을 출력하는 프로그램을 작성하라.
 */ 
 
 #include <stdio.h>
@@ -62,7 +60,7 @@ treePointer stack[MAX_STACK_SIZE];
 int top = -1;
 char expr[MAX_EXPR_SIZE];
 
-int main(void)
+int main(void) 
 {
     FILE *fp;
 
@@ -185,13 +183,13 @@ void postorder(treePointer ptr)
         printf("%c", ptr->data);
     }
 }
-//result
-// the length of input string should be less than 128
+
+// result
+// the length of input string should be less than 127
 // input string (postfix expression) : AB-C-DE/*+
 // creating its binary tree
 
-// Stack empty!
-// inorder traversals       : +A-B-C*D/E
-// preorder traversals      : +*--ABC/DE
-// postorder traversals     : AB-C-DE/*+
+// inorder traversal        : A-B-C*D/E
+// preorder traversals      : *--ABC/DE
+// postorder traversals     : AB-C-DE/*
 
