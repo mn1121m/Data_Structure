@@ -106,21 +106,23 @@ treePointer createCompBinTree(FILE *fp)
     while (fscanf(fp, "%c", &temp) != EOF) {
         root = insert2(root, createNode(temp));
     }
-    return root;
+    return root;        //root는 전역변수이기 때문에 return 할 필요는 없다. return 안받아도 값이 들어있기 때문.
 }
 /*중요*/
+// * (포인터) -> void ( 주소로 넘겨주므로 (= 바뀐자체가 저장되므로) return 할 필요가 없다 )
 void insert(treePointer *pRoot, treePointer newNode)
 {
     treePointer frontNode;  //* queue에서 맨앞에 있는 노드구나.
-
+    //1. If the tree is empty, initialize the root with new node.
     if (!(*pRoot)) {
         *pRoot = newNode;
-    } else {
-        frontNode = queue[front + 1];
+    } //2. Else
+    else {
+        frontNode = queue[front + 1];       //get the front node of the queue.
 
-        if (!(frontNode->leftChild)) {
+        if (!(frontNode->leftChild)) {  
             frontNode->leftChild = newNode;
-        } else if (!(frontNode->rightChild)) {
+        } else if (!(frontNode->rightChild)) { 
             frontNode->rightChild = newNode;
         }
         if (hasBothChild(frontNode))
@@ -128,7 +130,7 @@ void insert(treePointer *pRoot, treePointer newNode)
     }
     enqueue(newNode);
 }
-//root 는 지역변수이기 때문에 return을 해줘야 하고 treePointer형으로 반환한다.
+// 바뀐 형태를 반환해줘야 하므로 -> return 해줘야 한다.
 treePointer insert2(treePointer root, treePointer newNode)
 {
     treePointer frontNode;
@@ -169,7 +171,7 @@ void enqueue(treePointer item)
         exit(EXIT_FAILURE);
     }
     // Enqueue
-    queue[++rear] = item;
+    queue[++rear] = item;   //rear를 뒤로 넘긴 다음에 item을 넣어주는 것임
 }
 treePointer dequeue()
 {
@@ -179,7 +181,7 @@ treePointer dequeue()
         return NULL;
     }
     // Dequeue
-    return queue[++front];
+    return queue[++front];  //front를 뒤로 넘긴 다음에 return 해준다.
 
 }
 
