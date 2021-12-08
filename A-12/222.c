@@ -1,3 +1,4 @@
+/*  review 2.c  */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -99,19 +100,19 @@ treePointer createCompBinTree(FILE *fp)
     }
     return root;
 }
-
 void insert(treePointer *pRoot, treePointer newNode)
 {
     treePointer frontNode;
 
     if(!(*pRoot)) {
         *pRoot = newNode;
-    } else {
+    }
+    else {
         frontNode = queue[front + 1];
 
         if(!(frontNode->leftChild)) {
             frontNode->leftChild = newNode;
-        }else if(!(frontNode->rightChild)) {
+        } else if(!(frontNode->rightChild)) {
             frontNode->rightChild = newNode;
         }
         if(hasBothChild(frontNode)) {
@@ -119,6 +120,28 @@ void insert(treePointer *pRoot, treePointer newNode)
         }
     }
     enqueue(newNode);
+}
+treePointer insert2(treePointer root, treePointer newNode)
+{
+    treePointer frontNode;
+
+    if(!(root)) {
+        root = newNode;
+    }
+    else {
+        frontNode = queue[front + 1];
+
+        if(!(frontNode->leftChild)) {
+            frontNode->leftChild = newNode;
+        } else if(!(frontNode->rightChild)) {
+            frontNode->rightChild = newNode;
+        }
+        if(hasBothChild(frontNode)) {
+            dequeue();
+        }
+    }
+    enqueue(newNode);
+    return root;
 }
 BOOL hasBothChild(treePointer ptr) //* 의문형함수 -> boolean 많이 쓴다.
 {
