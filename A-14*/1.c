@@ -1,9 +1,11 @@
-/* 질문
+/* => x
 자료구조응용
 14. Trees : 명제식 이진트리, heap
-1. postfix expression의 명제식을 파일로부터 입력받아 이진트리를 구성하여 중위순회 (inorder traversal)한 결과를 화면에 출력하라.
+1. postfix expression의 명제식을 파일로부터 입력받아 
+    이진트리를 구성하여 중위순회 (inorder traversal)한 결과를 화면에 출력하라.
 
-- createPostBinTree();
+[구현및 질문]
++ createPostBinTree();
 */
 #include <stdio.h>
 #include <stdlib.h>

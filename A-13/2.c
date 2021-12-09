@@ -6,7 +6,7 @@
 [참고]
 + levelOrder() -> node: 현재노드
 [중요]
-levelOrder, iterInorder -> 다시()
+levelOrder, iterInorder -> ok
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -50,6 +50,7 @@ treePointer dequeue();
 
 // Binary tree
 void levelOrder(treePointer root);
+void iterInOrder(treePointer root);
 
 void createPostBinTree();
 treePointer createNode(char data, treePointer leftChild, treePointer rightChild);
@@ -87,7 +88,10 @@ int main(void)
     printf("creating its binary tree\n\n");
     createPostBinTree();
 
-    printf("level order traversal\t : ");
+    printf("iterative inorder traversal\t: ");
+    iterInOrder(root);  putchar('\n');
+
+    printf("level order traversal\t\t: ");
     levelOrder(root);
 
 }
@@ -127,6 +131,18 @@ void levelOrder(treePointer root)   // root => 뿌리
         printf("%c", node->data);
         if (node->leftChild) enqueue(node->leftChild);
         if (node->rightChild) enqueue(node->rightChild);
+    }
+}
+void iterInOrder(treePointer root) 
+{
+
+    while(TRUE) {
+        for(; root; root = root->leftChild)
+            push(root);
+        root = pop();
+        if(!root) break;    // empty stack, root = NULL 이면 맨위(뿌리)라는 뜻임.
+        printf("%c", root->data);
+        root = root->rightChild;
     }
 }
 
@@ -198,6 +214,6 @@ the length of input string should be less than 128
 input string (postfix expression) : AB/C*D*E+
 creating its binary tree
 
-level order traversal    : +*E*D/CAB%   
-
+iterative inorder traversal     : A/B*C*D+E
+level order traversal           : +*E*D/CAB
 */

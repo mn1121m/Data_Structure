@@ -51,6 +51,7 @@ treePointer dequeue();
 
 // Binary tree =>*중요*
 void levelOrder(treePointer root);
+void iterInOrder(treePointer root);
 
 // Binary tree => *중요*
 treePointer createNode(char data, treePointer leftChild, treePointer rightChild);
@@ -68,6 +69,7 @@ void postorder(treePointer ptr);
 int main(void)
 {
     FILE *fp;
+    // iterative inorder traversal
     if( !(fp = fopen("input.txt", "r")) ) {
         fprintf(stderr, "Wrong file name\n"); 
         exit(EXIT_FAILURE);
@@ -75,12 +77,16 @@ int main(void)
     fscanf(fp, "%s", expr);
     fclose(fp);
 
+    printf("the length of input string should be less than %d\n", MAX_EXPR_SIZE);
     printf("input string (postfix expression) : %s\n", expr);
 
     printf("creating its binary tree\n\n");
     createPostBinTree();
 
-    printf("level order traversal\t : ");
+    printf("iterative inorder traversal\t: ");
+    iterInOrder(root);  putchar('\n');
+
+    printf("level order traversal\t\t: ");
     levelOrder(root);
 
     return 0;
@@ -98,8 +104,7 @@ void push(treePointer item)
 treePointer pop()
 {
     if( top == -1) {
-        fprintf(stderr, "Stack is empty\n");
-        exit(EXIT_FAILURE);
+        return NULL;
     }
     return stack[top--];
 }
@@ -136,6 +141,18 @@ void levelOrder(treePointer root)
             if(node->rightChild) enqueue(node->rightChild);
         }
         else break;
+    }
+}
+void iterInOrder(treePointer root) 
+{
+
+    while(TRUE) {
+        for(; root; root = root->leftChild)
+            push(root);
+        root = pop();
+        if(!root) break;    // empty stack, root = NULL 이면 맨위(뿌리)라는 뜻임.
+        printf("%c", root->data);
+        root = root->rightChild;
     }
 }
 treePointer createNode(char data, treePointer leftChild, treePointer rightChild)
@@ -210,3 +227,11 @@ void postorder(treePointer ptr)
         printf("%c", ptr->data);
     }
 }
+/* result
+the length of input string should be less than 128
+input string (postfix expression) : AB/C*D*E+
+creating its binary tree
+
+iterative inorder traversal     : A/B*C*D+E
+level order traversal           : +*E*D/CAB
+*/

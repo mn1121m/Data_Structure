@@ -1,9 +1,13 @@
-/* 질문
-3. 다음 입력파일의 데이터를 사용하여 최대히프(Max Heap)에 대한 실습을 수행한다. input.txt : 10 40 30 5 12 6 15 9 60
+/* => x
+자료구조응용
+14. Trees : 명제식 이진트리, heap
 
-- 출력 : (4) 실행 예 <--> input.txt 데이터 값이 일단 다릅니다.
-- 출력에 관해서 어떻게 구현하는지 설명부탁드리겠습니다.
+3. 다음 입력파일의 데이터를 사용하여 최대히프(Max Heap)에 대한 실습을 수행한다. 
+    input.txt : 10 40 30 5 12 6 15 9 60
 
+[구현 및 질문]
+- warning & error
+- 실제 결과랑 다르게 나오는데 어떻게 수정해야할지 모르겠음.
 */
 
 #include <stdio.h>
@@ -15,7 +19,7 @@ fprintf(stderr, "Insufficient memory.\n"); \
 exit(EXIT_FAILURE); \
 }
 
-#define MAX_ELEMENTS 256    /*  maximum heap size   */
+#define MAX_ELEMENTS 200    /*  maximum heap size  + 1 */
 #define HEAP_FULL(n) (n == MAX_ELEMENTS - 1)
 
 #define HEAP_EMPTY(n) (!n)

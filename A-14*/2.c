@@ -1,11 +1,13 @@
-/* 질문
-    2. postfix expression의 명제식을 파일로부터 입력받는다. 
+/* => x
+자료구조응용
+14. Trees : 명제식 이진트리, heap
+
+2. postfix expression의 명제식을 파일로부터 입력받는다. 
     이 명제식을 참으로 만들기 위해 입력 되는 변수에 대한 모든 경우의 값을 구하시오. 
     단 프로그램의 편의를 위해 입력되는 변수는 3개로 한다.
 
-- 전반적인 구조는 이해하였는데, 그중에서
-    createPostBinTree(), postOderEval() 에 대한 이해를 제대로 못했습니다.
-    풀이과정 설명부탁드리겠습니다.
+[구현 및 질문]
+- createPostBinTree(), postOderEval()
 */
 
 #include <stdio.h>
@@ -41,7 +43,7 @@ int top = -1;
 char expr[MAX_EXPR_SIZE];
 
 //  Functions
-treePointer createNode(logical data, int value, treePointer leftChild, treePointer rightChild);
+treePointer createNode(treePointer leftChild, logical data, int value, treePointer rightChild);
 void createPostBinTree();
 logical get_token(char *data, int *n);
 void postOrderEval(treePointer node, int a, int b, int c);
@@ -178,4 +180,3 @@ treePointer pop()
     }
     return stack[top--];
 }
-
