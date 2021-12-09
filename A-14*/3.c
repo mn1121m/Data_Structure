@@ -5,9 +5,9 @@
 3. 다음 입력파일의 데이터를 사용하여 최대히프(Max Heap)에 대한 실습을 수행한다. 
     input.txt : 10 40 30 5 12 6 15 9 60
 
-[구현 및 질문]
-- warning & error
-- 실제 결과랑 다르게 나오는데 어떻게 수정해야할지 모르겠음.
+[구현 복습]
+- void heap_print() 구현 -> ()
+- pop() -> if (heap[] == NULL), break;
 */
 
 #include <stdio.h>
@@ -21,7 +21,6 @@ exit(EXIT_FAILURE); \
 
 #define MAX_ELEMENTS 200    /*  maximum heap size  + 1 */
 #define HEAP_FULL(n) (n == MAX_ELEMENTS - 1)
-
 #define HEAP_EMPTY(n) (!n)
 
 #define TRUE 1
@@ -31,7 +30,6 @@ exit(EXIT_FAILURE); \
 typedef struct {
     int key;
     /* other fields */
-
 } element;
 
 //  Global variable
@@ -56,8 +54,7 @@ int main(void)
         exit(EXIT_FAILURE);
     }
     //  insert
-    while(!feof(fp)) {
-        fscanf(fp, "%d", &(temp.key));
+    while((fscanf(fp, "%d", &(temp.key))) != EOF) {
         push(temp, &n);
         heap_print();
     }
@@ -66,7 +63,7 @@ int main(void)
     //  delete
     printf("********* deletion from max heap *********\n");
     while(TRUE) {
-        //if heap[] == NULL, break;
+        //if (heap[] == NULL), break;
         pop(&n);
         heap_print();
     }
@@ -90,7 +87,7 @@ void push(element item, int *n)
 }
 element pop(int *n)
 {
-    /* delete element with the hightest key from the key */
+    /*  delete element with the hightest key from the heap   */
     int parent, child;
     element item, temp;
 
@@ -98,9 +95,9 @@ element pop(int *n)
         fprintf(stderr, "The heap is empty. \n");
         exit(EXIT_FAILURE);
     }
-    /* save value of the element with the highest key */
+    /*  save value of the element with the highest key  */
     item = heap[1];
-    /* use last element in heap to adjust heap */
+    /*  use last element in heap to adjust heap */
     temp = heap[(*n)--];
     parent = 1;
     child = 2;
@@ -121,7 +118,7 @@ element pop(int *n)
 void heap_print()
 {
     int i;
-    for(i = 0; i < n; i++) {
+    for(i = 1; i <= n; i++) {   //  i = ++(*n); 먼저 ++ 했으므로 1부터 해줘야 한다.
         printf("%d ", heap[i].key);
     }
     printf("\n");
