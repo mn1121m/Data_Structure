@@ -1,4 +1,6 @@
-/* 과제 : A01 ~ A03 */
+/* 과제 : A01 ~ A03 
+data structure
+*/
 #include <stdio.h>
 
 int main(void)

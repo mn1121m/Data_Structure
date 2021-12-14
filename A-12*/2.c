@@ -1,5 +1,5 @@
 /* 
-Data structure 
+data structure
 12. Trees : create Binary tree
 
 2. [큐를 이용한 완전이진트리 생성] 파일입력을 받아 다음과 같은 완전이진트리(complete binary tree)를 구성하여,
@@ -37,10 +37,7 @@ typedef struct node {
     treePointer leftChild, rightChild;
 } tNode;
 
-// Queue
-// Linear queue
 
-//
 // Functions
 // Binary tree
 treePointer createNode(char data);
@@ -55,6 +52,7 @@ void preorder(treePointer ptr);
 void postorder(treePointer ptr);
 
 // Queue
+// Linear queue
 void enqueue(treePointer item);
 treePointer dequeue();
 

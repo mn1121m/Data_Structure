@@ -1,5 +1,5 @@
 /*
-자료구조응용
+data structure
 19. Graph: Dijkstra, AOV(Topological sort)
 2. 아래의 AOV network에서 task의 작업 순서를 나열하시오.
 */

@@ -1,5 +1,5 @@
 /*
-자료구조응용
+data structure
 11. Equivalence Class, Doubly Linked Circular List
 *Task*
 2. 다음과 같이 정수 데이터를 입력하면서 

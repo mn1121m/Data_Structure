@@ -1,4 +1,6 @@
 /*
+data structure
+06. 스택과 큐 
 2. [ 정적할당배열을 이용한 선형큐(linear queue) ] 
 다음과 같은 선형 큐를 생성하고 실행 예와 같이 수행되는 프로그램을 작성하라. 
 이를 위해, addq, deleteq, queueFull, queueEmpty qprint(queue의 내용을 출력) 함수를 구현하여야 한다.

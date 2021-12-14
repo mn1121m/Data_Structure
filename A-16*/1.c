@@ -1,5 +1,5 @@
-/*  다시()
-자료구조응용
+/*  
+data structure
 16. Adjacency List, Adjacency Multilists
 1. 다음과 같이 파일 입력을 통해 무방향 그래프(undirected graph)나 
  방향 그래프(directed graph)를 인접리스트(adjacency-list)로 구성하는 프로그램을 작성하시오.
@@ -45,7 +45,7 @@ int main(void)
     int debug = 0;
 
     printf("<<<<<<<<<<<< Adjacency List >>>>>>>>>>>>>\n");
-    if((fp = fopen("input.txt", "r")) == NULL) {
+    if((fp = fopen("input1.txt", "r")) == NULL) {
         fprintf(stderr, "Wrong file name.\n");
         exit(EXIT_FAILURE);
     }
@@ -100,6 +100,7 @@ void printGraph(graphPointer *adjLists, int numOfVer)
     }
 }
 /* result
+[input1.txt]
 <<<<<<<<<<<< Adjacency List >>>>>>>>>>>>>
 adjLists[0] :   3  2  1  
 adjLists[1] :   3  2  0  
@@ -107,11 +108,14 @@ adjLists[2] :   3  1  0
 adjLists[3] :   2  1  0  
 
 
+[input2.txt]
 <<<<<<<<<<<< Adjacency List >>>>>>>>>>>>>
 adjLists[0] :   1  
 adjLists[1] :   0  2  
 adjLists[2] :
 
+
+[input3.txt]
 <<<<<<<<<<<< Adjacency List >>>>>>>>>>>>>
 adjLists[0] :   2  1  
 adjLists[1] :   3  0  

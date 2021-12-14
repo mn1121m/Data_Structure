@@ -1,5 +1,5 @@
 /* => x
-자료구조응용
+data structure
 14. Trees : 명제식 이진트리, heap
 
 2. postfix expression의 명제식을 파일로부터 입력받는다. 

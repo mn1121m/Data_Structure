@@ -1,4 +1,5 @@
-/* 다시()
+/*
+data structure
 2. 다음과 같이 사용자로부터 정보를 입력받아서 무방향그래프(undirected graph)를
  Adjacency multilist로 구성하여
  각 정점에 부속되는 간선을 출력하는 프로그램을 작성하라.
@@ -53,7 +54,7 @@ int main(void)
     FILE *fp;
     int i, u, v;
 
-    if((fp = fopen("input2.txt", "r")) == NULL) {
+    if((fp = fopen("input2-1.txt", "r")) == NULL) {
         fprintf(stderr, "Wrong file name.\n");
         exit(EXIT_FAILURE);
     }
@@ -183,7 +184,7 @@ void printMultilist(int numVertex, int choice)
 }
 
 /* result
-case 1
+case 1 [input2-1.txt]
 <<<<<<<<<<<<<< egdes incident to each vertex >>>>>>>>>>>>>>>>
 Input data ordered : 
 edges incident to vertex 0 : (0, 1) (0, 2) (0, 3) 
@@ -197,7 +198,7 @@ edges incident to vertex 1 : (1, 0) (1, 2) (1, 3)
 edges incident to vertex 2 : (2, 0) (2, 1) (2, 3) 
 edges incident to vertex 3 : (3, 0) (3, 1) (3, 2)
 
-case 2
+case 2 [intput2-2.txt]
 <<<<<<<<<<<<<< egdes incident to each vertex >>>>>>>>>>>>>>>>
 Input data ordered : 
 edges incident to vertex 0 : (0, 1) (0, 3) (0, 2) 

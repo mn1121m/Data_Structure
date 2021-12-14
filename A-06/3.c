@@ -1,4 +1,6 @@
 /* pass
+data structure
+06. 스택과 큐 
 3. [ 환형큐(circular queue) ] 2번 문제의 프로그램을 환형큐 프로그램으로 수정하라.
     add, delete, qprint 명령어를 구현하시오.
 

@@ -1,9 +1,4 @@
-/* 복습
-자료구조응용
-19. Graph: Dijkstra, AOV(Topological sort)
-1. Dijkstra's algorithm을 사용하여 아래 그래프에서 시작 정점(0)에서 
-다른 모든 정점으로 가는 최단 경로와 가중치 값(weight value)을 시오.
-*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

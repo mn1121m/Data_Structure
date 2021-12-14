@@ -1,3 +1,6 @@
+/* 
+data structure
+*/
 #include <stdio.h>
 
 //return을 여러개 할 경우 *을 이용한다. 

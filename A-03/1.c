@@ -1,5 +1,5 @@
 /* remind
-자료구조응용
+data structure
 03. 성능측정(Performance Measurement)
 
 1. 다음 프로그램의 func1, func2, func3을 정의한 후 실행되도록 구현하라.

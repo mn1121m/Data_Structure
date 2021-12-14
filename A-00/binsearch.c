@@ -1,4 +1,6 @@
-// unsorted -> sorted
+/* unsorted -> sorted
+data structure
+*/
 #include <stdio.h>
 
 void printAry(int *ary, int size);

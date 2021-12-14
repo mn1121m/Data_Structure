@@ -1,5 +1,6 @@
 /*
-자료구조응용 17. Graph: DFS, BFS
+data structure
+17. Graph: DFS, BFS
 2. 위 1번 문제에 대해 dfs 대신 bfs의 결과를 출력하는 프로그램을 작성하라.
 */
 #include <stdio.h>

@@ -1,4 +1,5 @@
 /* 중요
+data structure
 05. 다항식더하기, 전치행렬구하기 - 1번 응용
 
 2. 다음 희소행렬(sparse matrix)에 대한 전치행렬(transpose matrix)을 구하는 함수로 

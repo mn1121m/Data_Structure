@@ -1,5 +1,6 @@
 /*
-자료구조응용 17. Graph: DFS, BFS
+data structure
+17. Graph: DFS, BFS
 1. 다음과 같이 무방향그래프(undirected graph) 데이터를 입력받아 인접리스트를 만들고 dfs 결과를 출력하는 프로그램을 작성하라.
 
 */

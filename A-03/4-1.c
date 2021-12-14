@@ -1,4 +1,6 @@
 /* remind
+data structure
+03. 성능측정(Performance Measurement)
 
 4. 3번 소스에 대해 데이터 생성부분을 일부 수정하여 
 다음 세 가지 경우에 대해 성능측정을 하여 비교하라. 

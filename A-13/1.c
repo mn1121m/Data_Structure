@@ -1,5 +1,5 @@
-/* 0718 풀이
-자료구조응용
+/*
+data structure
 13. Trees : 이진트리 생성 및 순회
 
 1. 후위표현식(postfix expression)을 입력받아 Figure 5.16과 같은 이진트리를 구성한 후, 

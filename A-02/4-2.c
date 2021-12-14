@@ -1,5 +1,6 @@
 /* remind
-자료구조응용 02. 배열과 포인터
+data structure
+02. 배열과 포인터
 
 */
 

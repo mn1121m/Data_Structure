@@ -1,5 +1,5 @@
 /*
-자료구조응용
+data structure
 11. Equivalence Class, Doubly Linked Circular List
 *Task*
 1. 다음과 같이 집합 S에 대한 동치관계(equivalence relation, ≡)

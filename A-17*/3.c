@@ -1,5 +1,6 @@
 /*
-자료구조응용 17. Graph: DFS, BFS
+data structure
+17. Graph: DFS, BFS
 3. 입력된 무방향그래프의 connected component를 출력하는 프로그램을 작성하라.
 
 */
