@@ -1,6 +1,7 @@
 /*
 data structure
 11. Equivalence Class, Doubly Linked Circular List
+
 *Task*
 1. 다음과 같이 집합 S에 대한 동치관계(equivalence relation, ≡)
  가 성립할 때 S의 동치류 (equivalence class)를 구하는 프로그램을 작성하라.

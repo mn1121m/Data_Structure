@@ -1,6 +1,7 @@
 /*
 data structure
 11. Equivalence Class, Doubly Linked Circular List
+
 *Task*
 2. 다음과 같이 정수 데이터를 입력하면서 
  “헤더노드를 가진 이중연결환형리스트 (doubly linked circular list)”를 만들고
