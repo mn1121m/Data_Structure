@@ -7,8 +7,6 @@ data structure
 
     참조 :  & 
     역참조 : *, [], ->
-[질문]
- +  수정을 했는데도 결과값이 제대로 안나오는데, 무엇이 잘못되었나요 ?
 */
 #include <stdio.h>
 #include <stdlib.h>

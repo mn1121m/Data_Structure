@@ -8,7 +8,7 @@ data structure
 - 질문 -
 +   graphPointer *adjLists;      -> * 쓰는이유 : MutiLinkedlist (다중연결리스트이기 때문이다)
 +   int numOfVer, numOfEdges;
-    char graphType;             ->  main()함수내에서가 아닌 전역변수로 바로 구현하는건 경험에서 나오는 건가요 ? 아니면 무슨 이유가 있나요 ?
+    char graphType;             ->  main()함수내에서가 아닌 전역변수로 구현하는 아이디어
 
 */
 #include <stdio.h>

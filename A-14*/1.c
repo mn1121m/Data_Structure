@@ -5,7 +5,7 @@ data structure
 1. postfix expression의 명제식을 파일로부터 입력받아 
     이진트리를 구성하여 중위순회 (inorder traversal)한 결과를 화면에 출력하라.
 
-[구현및 질문]
+[질문]
 + createPostBinTree();
 */
 #include <stdio.h>
