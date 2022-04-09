@@ -1,8 +1,9 @@
 # Data Structure
+- 2021_2_KNU_Data Structure
+- This is a repository for Data structure implement in C language.
 
 ## Study
 - 학교에서 나온 자료구조 문제를 풀면서 복습 및 정리하였습니다.
-- This is a repository for Data structure implement in C language.
 
 ## Text book
 - Title: Fundamentals of data structures in C, 2nd edition.
