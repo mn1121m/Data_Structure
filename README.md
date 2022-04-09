@@ -7,3 +7,7 @@
 - Authors: Horowitz, Sahni, Anderson-Freed.
 
 ![자료구조_입체](http://image.kyobobook.co.kr/images/book/large/407/l9780929306407.jpg)
+
+
+## Study
+- 학교에서 나온 과제를 풀면서 복습 및 정리할 것이다.
